@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +10,19 @@
 <style>
     body {
         background-color: #232323;
-        color: azure;
+        /*color: azure;*/
         font-family: 'Kanit', sans-serif;
+    }
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 80%;
     }
 </style>
 <body>
@@ -37,7 +48,11 @@
                     <a class="nav-link" href="#">Manage products</a>
                 </li>
             </div>
-
+            <div sec:authorize="hasRole('ROLE_MANAGER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Manage users</a>
+                </li>
+            </div>
 
         </ul>
         <form class="form-inline align-right ml-auto mr-4" method="post" action="/logout">
@@ -47,19 +62,59 @@
 </nav>
 <br><br>
 <div class="container-fluid">
-    <div class="col-2">
-        <div class="list-group">
-            <a href="/products/meat" class="list-group-item list-group-item-action list-group-item-dark" >Meat</a>
-            <a href="/products/dairy" class="list-group-item list-group-item-action list-group-item-dark" >Dairy</a>
-            <a href="/products/seafood" class="list-group-item list-group-item-action list-group-item-dark" >Seafood</a>
-            <a href="/products/bakery" class="list-group-item list-group-item-action list-group-item-dark" >Bakery</a>
-            <a href="/products/snacks" class="list-group-item list-group-item-action list-group-item-dark" >Snacks</a>
-            <a href="/products/candy" class="list-group-item list-group-item-action list-group-item-dark" >Candy</a>
-            <a href="/products/beverages" class="list-group-item list-group-item-action list-group-item-dark" >Beverages</a>
-            <a href="/products/deli" class="list-group-item list-group-item-action list-group-item-dark" >Deli</a>
+    <div class="row">
+        <div class="col-2">
+            <div class="list-group">
+                <a href="/products/meat" class="list-group-item list-group-item-action list-group-item-dark" >Meat</a>
+                <a href="/products/dairy" class="list-group-item list-group-item-action list-group-item-dark" >Dairy</a>
+                <a href="/products/seafood" class="list-group-item list-group-item-action list-group-item-dark" >Seafood</a>
+                <a href="/products/bakery" class="list-group-item list-group-item-action list-group-item-dark" >Bakery</a>
+                <a href="/products/snacks" class="list-group-item list-group-item-action list-group-item-dark" >Snacks</a>
+                <a href="/products/candy" class="list-group-item list-group-item-action list-group-item-dark" >Candy</a>
+                <a href="/products/beverages" class="list-group-item list-group-item-action list-group-item-dark" >Beverages</a>
+                <a href="/products/deli" class="list-group-item list-group-item-action list-group-item-dark" >Deli</a>
+            </div>
+        </div>
+        <div class="col-8">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td><img src="http://res.cloudinary.com/ddd3ldsj2/image/upload/v1598369447/ugxjkydkygwrd4qm01r3.jpg"</td>
+                    <td><img class="img-fluid" th:src="${product.imageUrl}"></img></td>
+                    <td><span th:text="${product.name}"> </span></td>
+                    <td><span th:text="${product.description}"> </span></td>
+                    <td><span th:text="${product.price}"> </span></td>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <td>
+                            <a href="#">Edit</a>
+                        </td>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <td>
+                            <a th:href="@{'/products/delete/'+${product.id}}">Delete</a>
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <td><input type="button" value="Add new" onclick="window.location.href='/products/add';return false;"
+                                   class="btn btn-success"></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
 
 </body>
 </html>

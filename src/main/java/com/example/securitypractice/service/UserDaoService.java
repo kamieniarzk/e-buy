@@ -1,5 +1,7 @@
-package com.example.securitypractice.auth;
+package com.example.securitypractice.service;
 
+import com.example.securitypractice.auth.User;
+import com.example.securitypractice.auth.UserDao;
 import com.example.securitypractice.repository.UserRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;

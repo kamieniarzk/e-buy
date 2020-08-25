@@ -1,5 +1,6 @@
-package com.example.securitypractice.auth;
+package com.example.securitypractice.service;
 
+import com.example.securitypractice.auth.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
