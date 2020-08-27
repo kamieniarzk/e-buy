@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -37,12 +38,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Order history</a>
             </li>
-            <div sec:authorize="hasRole('ROLE_MANAGER')">
+            <div sec:authorize="hasRole('ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Manage products</a>
                 </li>
             </div>
-            <div sec:authorize="hasRole('ROLE_MANAGER')">
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Manage users</a>
                 </li>
@@ -119,15 +120,12 @@
             </div>
         </div>
             </div>
-        </tbody>
-        </table>
     </div>
-</div>
-</div>
+
 <script>
     // for displaying the chosen filename and path
     $('#inputGroupFile02').on('change',function(){
-        var fileName = $(this).val();
+        let fileName = $(this).val();
         $(this).next('.custom-file-label').html(fileName);
     })
 </script>

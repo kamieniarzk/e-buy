@@ -17,7 +17,8 @@ public class Product {
     private String description;
     private double mass;
     private double price;
-    private Integer quantity;
+    private int quantity;
     private String category;
     private String imageUrl;
+    private String offeredBy;
 }

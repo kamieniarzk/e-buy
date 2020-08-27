@@ -6,11 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/styles/style.css"/>
 </head>
 <style>
     body {
         background-color: #232323;
-        /*color: azure;*/
         font-family: 'Kanit', sans-serif;
     }
     table {
@@ -23,6 +23,12 @@
         margin-left: auto;
         margin-right: auto;
         max-width: 80%;
+    }
+    h3 {
+        text-align: center;
+    }
+    .cart {
+        background-color: #ffad00;
     }
 </style>
 <body>
@@ -43,16 +49,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Order history</a>
             </li>
-            <div sec:authorize="hasRole('ROLE_MANAGER')">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Manage products</a>
-                </li>
-            </div>
-            <div sec:authorize="hasRole('ROLE_MANAGER')">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Manage users</a>
-                </li>
-            </div>
+            <li class="nav-item" sec:authorize="hasAnyRole('ROLE_SELLER')">
+                <a class="nav-link" href="/products/myProducts">My products</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link" href="#">Manage products</a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link" href="#">Manage users</a>
+            </li>
 
         </ul>
         <form class="form-inline align-right ml-auto mr-4" method="post" action="/logout">
@@ -87,11 +93,17 @@
                 </thead>
                 <tbody>
                 <tr th:each="product : ${products}">
-                    <td><img src="http://res.cloudinary.com/ddd3ldsj2/image/upload/v1598369447/ugxjkydkygwrd4qm01r3.jpg"</td>
+                    <td><img src="http://res.cloudinary.com/ddd3ldsj2/image/upload/v1598369447/ugxjkydkygwrd4qm01r3.jpg"></td>
                     <td><img class="img-fluid" th:src="${product.imageUrl}"></img></td>
                     <td><span th:text="${product.name}"> </span></td>
                     <td><span th:text="${product.description}"> </span></td>
                     <td><span th:text="${product.price}"> </span></td>
+                    <td th:if="${not (product.quantity == 0)}">
+                        <a th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
+                    </td>
+                    <td th:if="${product.quantity == 0}">
+                        <span>Out of stock</span>
+                    </td>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <td>
                             <a href="#">Edit</a>
@@ -104,13 +116,35 @@
                     </div>
                 </tr>
                 <tr>
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SELLER')">
                         <td><input type="button" value="Add new" onclick="window.location.href='/products/add';return false;"
                                    class="btn btn-success"></td>
                     </div>
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="col-2">
+            <div class="cart">
+                <h3>Cart</h3>
+                <div style="text-align:center;" th:if="${cart.isEmpty()}">
+                    Your cart is empty
+                    <p>Time to start shopping!</p>
+                </div>
+                <table>
+                <tr th:each="prod : ${cart}">
+                    <td th:text="${prod.key}">keyvalue</td>
+                    <td style="text-align: right;">
+                        <a href="/products/addToCart/">-</a>
+                    </td>
+                    <td style="text-align: center;" th:text="${prod.value}">num</td>
+                    <td style="text-align: left;">
+                        <a href=#>+</a>
+                    </td>
+
+                </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>

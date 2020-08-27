@@ -1,4 +1,4 @@
-<html lang="en"><head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -30,11 +30,14 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
         </p>
+
         <p>
-            <label for="remember-me">Remember me?</label>
-            <input type="checkbox" id="remember-me" name="remember-me" class="form-control" >
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="remember-me">
+                <label class="form-check-label" for="defaultCheck1">Remember me?</label>
         </p>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">login</button>
+        <a class="btn btn-lg btn-primary btn-block" th:href="@{'/signup'}">sign up</a>
     </form>
 </div>
 </body></html>

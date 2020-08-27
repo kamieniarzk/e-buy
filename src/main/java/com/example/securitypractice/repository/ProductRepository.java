@@ -10,4 +10,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM product WHERE category=:category", nativeQuery = true)
     List<Product> getCategory(@Param("category") String category);
+
+    @Query(value = "SELECT * FROM product WHERE offered_by=:username", nativeQuery = true)
+    List<Product> getUserProducts(@Param("username") String username);
 }

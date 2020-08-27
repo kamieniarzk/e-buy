@@ -11,7 +11,7 @@ import static com.example.securitypractice.security.UserPermission.*;
 public enum UserRole {
     ADMIN(Sets.newHashSet(PRODUCT_READ, PRODUCT_WRITE, TRANSACTION_READ, TRANSACTION_WRITE)),
     SELLER(Sets.newHashSet(PRODUCT_READ, PRODUCT_WRITE, TRANSACTION_READ)),
-    CLIENT(Sets.newHashSet(PRODUCT_READ, TRANSACTION_READ, TRANSACTION_WRITE));
+    CUSTOMER(Sets.newHashSet(PRODUCT_READ, TRANSACTION_READ, TRANSACTION_WRITE));
 
     private final Set<UserPermission> permissions;
 

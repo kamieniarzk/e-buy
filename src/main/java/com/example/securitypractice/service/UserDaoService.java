@@ -13,7 +13,7 @@ import java.util.Optional;
 
 import static com.example.securitypractice.security.UserRole.*;
 
-@Repository("fake")
+@Repository
 public class UserDaoService implements UserDao {
 
     private final PasswordEncoder passwordEncoder;
