@@ -1,4 +1,4 @@
-# online-store
+# e-buy
 A Spring Boot application, imitating a basic functionality of an online store.
 Stack: 
 * `Spring Boot`,
