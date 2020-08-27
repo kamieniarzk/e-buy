@@ -23,7 +23,7 @@ public class OrderDetailsService {
     public void save(List<Product> products) {
         OrderDetails orderDetails = new OrderDetails();
         orderDetails.setClient(SecurityContextHolder.getContext().getAuthentication().getName());
-        orderDetails.setProducts(products);
+        //orderDetails.setProducts(products);
         orderDetailsRepository.save(orderDetails);
     }
 }
