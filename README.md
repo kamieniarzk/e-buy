@@ -1,5 +1,5 @@
 # e-buy
-A Spring Boot application, imitating a basic functionality of an online store.
+A Spring Boot application, imitating basic functionality of consumer-to-consumer and business-to-consumer sales service.
 Stack: 
 * `Spring Boot`,
 * `Spring Data JPA` with `Hibernate` coupled with H2 database (for simplicity of development),
