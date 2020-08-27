@@ -29,7 +29,8 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
 
-    public User(String username, String password, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, Set<SimpleGrantedAuthority> grantedAuthorities) {
+    public User(String username, String password, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired,
+                boolean isEnabled, Set<SimpleGrantedAuthority> grantedAuthorities) {
         this.username = username;
         this.password = password;
         this.isAccountNonExpired = isAccountNonExpired;
@@ -40,8 +41,7 @@ public class User implements UserDetails {
     }
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "authorities", joinColumns=@JoinColumn(name="id")
-    )
+    @CollectionTable(name = "authorities", joinColumns=@JoinColumn(name="id"))
     private Set<SimpleGrantedAuthority> grantedAuthorities;
 
     @Override

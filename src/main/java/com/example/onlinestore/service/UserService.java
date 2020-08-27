@@ -46,6 +46,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        userRepository.save(new User("michaelscott", passwordEncoder.encode("password"), true, true, true, true, UserRole.ADMIN.getGrantedAuthorities()));
         return userDao
                 .selectUserByUsername(username)
                 .orElseThrow(() ->

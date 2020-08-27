@@ -17,8 +17,8 @@ public class ProductService {
 
 
     public Optional<Product> get(long id) {
-        if(cartService.getStock().containsKey(id)) {
-            return Optional.of(cartService.getStock().get(id));
+        if(cartService.getSessionStock().containsKey(id)) {
+            return Optional.of(cartService.getSessionStock().get(id));
         } else {
             return Optional.empty();
         }
@@ -30,18 +30,18 @@ public class ProductService {
     }
 
     public List<Product> getAll() {
-        return cartService.getStock().values().stream()
+        return cartService.getSessionStock().values().stream()
                 .collect(Collectors.toList());
     }
 
     public List<Product> getCategory(String category) {
-        return cartService.getStock().values().stream()
+        return cartService.getSessionStock().values().stream()
                 .filter(product -> product.getCategory().equals(category.toUpperCase()))
                 .collect(Collectors.toList());
     }
 
     public List<Product> getUserProducts(String username) {
-        return cartService.getStock().values().stream()
+        return cartService.getSessionStock().values().stream()
                 .filter(product -> product.getOfferedBy().equals(username))
                 .collect(Collectors.toList());
     }

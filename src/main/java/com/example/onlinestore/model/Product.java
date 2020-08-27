@@ -3,10 +3,7 @@ package com.example.onlinestore.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -23,6 +20,9 @@ public class Product {
     private String category;
     private String imageUrl;
     private String offeredBy;
+    private boolean availableForSale;
+    private boolean archived; // if a product is deleted (unavailable for sale) but kept in database for OrderDetails
+
 
     public Product(Product product) {
         this.id = product.id;
@@ -34,5 +34,7 @@ public class Product {
         this.category = product.category;
         this.imageUrl = product.imageUrl;
         this.offeredBy = product.offeredBy;
+        availableForSale = true;
+        archived = false;
     }
 }
