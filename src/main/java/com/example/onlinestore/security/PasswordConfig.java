@@ -1,4 +1,4 @@
-package com.example.securitypractice.security;
+package com.example.onlinestore.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

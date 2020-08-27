@@ -1,10 +1,9 @@
-package com.example.securitypractice.controllers;
+package com.example.onlinestore.controllers;
 
-import com.example.securitypractice.auth.User;
-import com.example.securitypractice.repository.ProductRepository;
-import com.example.securitypractice.repository.UserRepository;
-import com.example.securitypractice.security.UserRole;
-import com.example.securitypractice.service.UserService;
+import com.example.onlinestore.auth.User;
+import com.example.onlinestore.repository.ProductRepository;
+import com.example.onlinestore.repository.UserRepository;
+import com.example.onlinestore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,9 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class TemplateController {

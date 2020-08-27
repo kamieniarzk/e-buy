@@ -1,6 +1,6 @@
-package com.example.securitypractice.security;
+package com.example.onlinestore.security;
 
-import com.example.securitypractice.service.UserService;
+import com.example.onlinestore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

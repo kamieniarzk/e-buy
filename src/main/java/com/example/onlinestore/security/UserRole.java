@@ -1,4 +1,4 @@
-package com.example.securitypractice.security;
+package com.example.onlinestore.security;
 
 import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.example.securitypractice.security.UserPermission.*;
+import static com.example.onlinestore.security.UserPermission.*;
 
 public enum UserRole {
     ADMIN(Sets.newHashSet(PRODUCT_READ, PRODUCT_WRITE, TRANSACTION_READ, TRANSACTION_WRITE)),

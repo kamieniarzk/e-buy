@@ -1,11 +1,9 @@
-package com.example.securitypractice.service;
+package com.example.onlinestore.service;
 
-import com.example.securitypractice.auth.User;
-import com.example.securitypractice.auth.UserDao;
-import com.example.securitypractice.repository.UserRepository;
-import com.example.securitypractice.security.UserRole;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.example.onlinestore.auth.User;
+import com.example.onlinestore.auth.UserDao;
+import com.example.onlinestore.repository.UserRepository;
+import com.example.onlinestore.security.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

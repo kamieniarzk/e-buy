@@ -1,4 +1,4 @@
-package com.example.securitypractice.model;
+package com.example.onlinestore.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
-package com.example.securitypractice.controllers;
+package com.example.onlinestore.controllers;
 
-import com.example.securitypractice.model.Product;
-import com.example.securitypractice.model.ProductCategory;
-import com.example.securitypractice.service.CartService;
-import com.example.securitypractice.service.ImageUploader;
-import com.example.securitypractice.service.ProductService;
+import com.example.onlinestore.model.Product;
+import com.example.onlinestore.model.ProductCategory;
+import com.example.onlinestore.service.CartService;
+import com.example.onlinestore.service.ImageUploader;
+import com.example.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 
 
 @Controller
@@ -30,9 +29,10 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/{category}")
+    @GetMapping("/category/{category}")
     public String showCategory(@PathVariable("category") String category,  Model model) {
         model.addAttribute("products", productService.getCategory(category));
+        model.addAttribute("categories", ProductCategory.getCategories());
         model.addAttribute("cart", cartService.getCart());
         return "home";
     }
@@ -43,7 +43,14 @@ public class ProductController {
         model.addAttribute("products", productService.getUserProducts(loggedUser.getName()));
         model.addAttribute("cart", cartService.getCart());
         return "home";
+    }
 
+    @GetMapping("/{id}")
+    public String showProduct(@PathVariable("id") long id, Model model) {
+        productService.get(id).ifPresent(product -> model.addAttribute("product", product));
+        model.addAttribute("categories", ProductCategory.getCategories());
+        model.addAttribute("cart", cartService.getCart());
+        return "product";
     }
 
     @GetMapping("/add")
@@ -64,6 +71,7 @@ public class ProductController {
         productService.save(product);
 
         model.addAttribute("cart", cartService.getCart());
+        model.addAttribute("categories", ProductCategory.getCategories());
         return "redirect:/products/home";
     }
 
@@ -71,13 +79,21 @@ public class ProductController {
     public String delete(@PathVariable("id") long id, Model model) {
         productService.deleteById(id);
         model.addAttribute("cart", cartService.getCart());
+        model.addAttribute("categories", ProductCategory.getCategories());
         return "redirect:/products/home";
     }
 
-    @Transactional
     @GetMapping("/addToCart/{id}")
-    public String add(@PathVariable("id") long id, Model model) {
+    public String addToCart(@PathVariable("id") long id, Model model) {
         model.addAttribute("cart", cartService.addProduct(id));
+        model.addAttribute("categories", ProductCategory.getCategories());
+        return "redirect:/products/home";
+    }
+
+    @GetMapping("/removeFromCart/{id}")
+    public String removeFromCart(@PathVariable("id") long id, Model model) {
+        model.addAttribute("cart", cartService.removeProduct(id));
+        model.addAttribute("categories", ProductCategory.getCategories());
         return "redirect:/products/home";
     }
 
@@ -85,6 +101,7 @@ public class ProductController {
     public String home(Model model) {
         model.addAttribute("cart", cartService.getCart());
         model.addAttribute("products", productService.getAll());
+        model.addAttribute("categories", ProductCategory.getCategories());
         return "home";
     }
 }

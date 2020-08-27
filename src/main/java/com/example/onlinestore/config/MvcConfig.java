@@ -1,4 +1,4 @@
-package com.example.securitypractice.config;
+package com.example.onlinestore.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

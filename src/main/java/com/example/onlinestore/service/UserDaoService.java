@@ -1,17 +1,14 @@
-package com.example.securitypractice.service;
+package com.example.onlinestore.service;
 
-import com.example.securitypractice.auth.User;
-import com.example.securitypractice.auth.UserDao;
-import com.example.securitypractice.repository.UserRepository;
-import com.google.common.collect.Lists;
+import com.example.onlinestore.auth.User;
+import com.example.onlinestore.auth.UserDao;
+import com.example.onlinestore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
-import static com.example.securitypractice.security.UserRole.*;
 
 @Repository
 public class UserDaoService implements UserDao {

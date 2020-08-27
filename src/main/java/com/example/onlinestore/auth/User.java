@@ -1,4 +1,4 @@
-package com.example.securitypractice.auth;
+package com.example.onlinestore.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor

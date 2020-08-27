@@ -1,6 +1,6 @@
-package com.example.securitypractice.repository;
+package com.example.onlinestore.repository;
 
-import com.example.securitypractice.model.Product;
+import com.example.onlinestore.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

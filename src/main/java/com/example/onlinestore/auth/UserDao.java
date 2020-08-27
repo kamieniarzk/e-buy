@@ -1,4 +1,4 @@
-package com.example.securitypractice.auth;
+package com.example.onlinestore.auth;
 
 import java.util.Optional;
 

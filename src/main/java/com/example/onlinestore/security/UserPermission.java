@@ -1,4 +1,4 @@
-package com.example.securitypractice.security;
+package com.example.onlinestore.security;
 
 public enum UserPermission {
     PRODUCT_READ("product:read"),

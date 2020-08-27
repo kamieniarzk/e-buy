@@ -6,31 +6,30 @@
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
-        <link rel="stylesheet" th:href="@{/static/styles/style.css}"/>
-    </head>
-    <style>
-        body {
-            background-color: #232323;
-            font-family: 'Kanit', sans-serif;
-        }
-        table {
-            width: 100%;
-            table-layout: fixed;
-        }
+        <style>
+            body {
+                background-color: #232323;
+                font-family: 'Kanit', sans-serif;
+            }
+            table {
+                width: 100%;
+                table-layout: fixed;
+            }
 
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 70%;
-        }
-        h3 {
-            text-align: center;
-        }
-        .cart {
-            background-color: #ffad00;
-        }
-    </style>
+            /*img {*/
+            /*    display: block;*/
+            /*    margin-left: auto;*/
+            /*    margin-right: auto;*/
+            /*    max-width: 80%;*/
+            /*}*/
+            h3 {
+                text-align: center;
+            }
+            .cart {
+                background-color: #ffad00;
+            }
+        </style>
+    </head>
     <body>
         <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-dark align-top">
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -64,52 +63,16 @@
         <br><br>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2">
-                    <div class="list-group" th:each="category : ${categories}">
-                        <a th:href="@{'/products/category'+${category}}" class="list-group-item list-group-item-action list-group-item-dark"><p th:text="${category}"></p></a>
-                    </div>
-                </div>
+            <div class="col-2"></div>
                 <div class="col-8">
-                    <table class="table table-dark">
-                        <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product : ${products}">
-                            <td><img  th:src="${product.imageUrl}"></img></td>
-                            <td><a th:href="@{'/products/'+${product.id}}" th:text="${product.name}"> </a></td>
-                            <td><span th:text="${product.description}"> </span></td>
-                            <td><span th:text="${product.price}"> </span></td>
-                            <td th:if="${not (product.quantity == 0)}">
-                                <a th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
-                            </td>
-                            <td th:if="${product.quantity == 0}">
-                                <span>Out of stock</span>
-                            </td>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <td>
-                                    <a href="#">Edit</a>
-                                </td>
-                            </div>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <td>
-                                    <a th:href="@{'/products/delete/'+${product.id}}">Delete</a>
-                                </td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SELLER')">
-                                <td><input type="button" value="Add new" onclick="window.location.href='/products/add';return false;"
-                                           class="btn btn-success"></td>
-                            </div>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="card mb-3" th:object="${product}">
+                        <img th:src="${product.imageUrl}" class="card-img-top" alt="This product has no picture">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <div class="cart">
