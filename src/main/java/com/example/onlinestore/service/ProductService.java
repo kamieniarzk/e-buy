@@ -47,15 +47,22 @@ public class ProductService {
     }
 
     public void save(Product product) {
+        product.setAvailable(true);
         productRepository.save(product);
         cartService.addToStock(product);
     }
 
     public void deleteById(long id) {
-        if(productRepository.existsById(id)) {
-            productRepository.deleteById(id);
-            cartService.deleteFromStock(id);
-        }
+        productRepository.findById(id).ifPresent(
+                product -> {
+                    if(product.isArchived()) {
+                        product.setAvailable(false);
+                    } else {
+                        productRepository.deleteById(id);
+                    }
+                    cartService.deleteFromStock(id);
+                }
+        );
     }
 
 

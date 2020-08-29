@@ -5,7 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
+
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Data
@@ -20,5 +21,7 @@ public class OrderDetails {
     private Timestamp createdDate;
 
     // TODO - mapping for products
-    private Map<Product, Integer> products;
+
+    @ElementCollection
+    private Map<Long, Integer> products = new LinkedHashMap<>();
 }

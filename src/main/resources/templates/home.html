@@ -81,25 +81,27 @@
                         </thead>
                         <tbody>
                         <tr th:each="product : ${products}">
-                            <td><img  th:src="${product.imageUrl}"></img></td>
-                            <td><a th:href="@{'/products/'+${product.id}}" th:text="${product.name}"> </a></td>
-                            <td><span th:text="${product.description}"> </span></td>
-                            <td><span th:text="${product.price}"> </span></td>
-                            <td th:if="${not (product.quantity == 0)}">
-                                <a th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
-                            </td>
-                            <td th:if="${product.quantity == 0}">
-                                <span>Out of stock</span>
-                            </td>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <td>
-                                    <a href="#">Edit</a>
+                            <div th:if="${product.available}">
+                                <td><img  th:src="${product.imageUrl}"></img></td>
+                                <td><a th:href="@{'/products/'+${product.id}}" th:text="${product.name}"> </a></td>
+                                <td><span th:text="${product.description}"> </span></td>
+                                <td><span th:text="${product.price}"> </span></td>
+                                <td th:if="${not (product.quantity == 0)}">
+                                    <a th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
                                 </td>
-                            </div>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <td>
-                                    <a th:href="@{'/products/delete/'+${product.id}}">Delete</a>
+                                <td th:if="${product.quantity == 0}">
+                                    <span>Out of stock</span>
                                 </td>
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <td>
+                                        <a href="#">Edit</a>
+                                    </td>
+                                </div>
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <td>
+                                        <a th:href="@{'/products/delete/'+${product.id}}">Delete</a>
+                                    </td>
+                                </div>
                             </div>
                         </tr>
                         <tr>

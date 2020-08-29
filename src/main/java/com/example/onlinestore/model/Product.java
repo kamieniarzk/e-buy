@@ -20,8 +20,13 @@ public class Product {
     private String category;
     private String imageUrl;
     private String offeredBy;
-    private boolean availableForSale;
-    private boolean archived; // if a product is deleted (unavailable for sale) but kept in database for OrderDetails
+    private boolean available; // if not deleted
+    private boolean archived; // if ever sold
+    /* when seller/admin attempts to delete a product, a check is made and
+    if the product was ever sold then it needs to be persisted in the database
+    so that it can be seen from the orders history (only the available boolean is toggled then),
+    however if it was never sold, then it can be deleted from the database
+     */
 
 
     public Product(Product product) {
@@ -34,7 +39,5 @@ public class Product {
         this.category = product.category;
         this.imageUrl = product.imageUrl;
         this.offeredBy = product.offeredBy;
-        availableForSale = true;
-        archived = false;
     }
 }

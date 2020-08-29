@@ -83,7 +83,10 @@ public class CartService {
             }
         });
         if(checkedOut.get()) {
-            sessionStock.values().forEach(productRepository::save);
+            sessionStock.values().forEach(product -> {
+                product.setArchived(true);
+                productRepository.save(product);
+            });
             orderDetailsService.save(cart.values().stream().collect(Collectors.toList()));
             cart.clear();
             return null;

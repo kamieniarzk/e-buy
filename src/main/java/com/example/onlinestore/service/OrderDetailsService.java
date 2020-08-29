@@ -23,6 +23,9 @@ public class OrderDetailsService {
     public void save(List<Product> products) {
         OrderDetails orderDetails = new OrderDetails();
         orderDetails.setClient(SecurityContextHolder.getContext().getAuthentication().getName());
+        products.forEach(product -> {
+            orderDetails.getProducts().put(product.getId(), product.getQuantity());
+        });
         //orderDetails.setProducts(products);
         orderDetailsRepository.save(orderDetails);
     }

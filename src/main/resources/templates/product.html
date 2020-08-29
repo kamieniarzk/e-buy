@@ -16,6 +16,12 @@
                 table-layout: fixed;
             }
 
+            .product {
+                color: azure;
+            }
+            .productTitle {
+                font-weight: bold;
+            }
             /*img {*/
             /*    display: block;*/
             /*    margin-left: auto;*/
@@ -27,6 +33,7 @@
             }
             .cart {
                 background-color: #ffad00;
+                border-radius: 5px;
             }
         </style>
     </head>
@@ -65,12 +72,28 @@
             <div class="row">
             <div class="col-2"></div>
                 <div class="col-8">
-                    <div class="card mb-3" th:object="${product}">
-                        <img th:src="${product.imageUrl}" class="card-img-top" alt="This product has no picture">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img  src="http://res.cloudinary.com/ddd3ldsj2/image/upload/v1598701779/cvabevecm2bxcxxkx2bd.jpg" class="card-img-top" alt="This product has no picture">
+                        </div>
+                        <div class="product col-md-3">
+
+                                <h4 class="card-title" th:text="${product.name}">Card title</h4>
+                                <p class="productTitle">Category</p>
+                                <a class="card-text" th:href="@{'/products/category/'+${product.category}}" th:text="${product.category}">Category</a>
+                                <p class="productTitle">Mass</p>
+                                <p th:text="${product.mass + 'oz'}"></p>
+                                <p class="productTitle">Description</p>
+                                <p class="card-text" th:text="${product.description}">This product has no description.</p>
+                        </div>
+                        <div class="product col-md-3">
+                            <div class="card w-75" style="text-align: center;">
+                                <div class="bg-dark card-body">
+                                    <h5 class="card-title" th:text="${'$' + product.price}">Price</h5>
+                                    <p class="card-text" th:if="${product.quantity == 0}">Out of stock</p>
+                                    <a th:if="${not (product.quantity == 0)}" th:href="@{'/products/addToCart/'+${product.id}}" class="btn btn-warning">Add to cart</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
