@@ -9,8 +9,6 @@ Stack:
 * `Maven`,
 
 ## mandatory TODOs
-* add database mapping for `products` in `OrderDetails` 
-* finish html for detailed product view, 
 * make endpoint for editing product,
 * make changes to home html,
 * plan the whole routing from scratch - now it's a mess,
