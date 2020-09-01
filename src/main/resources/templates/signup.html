@@ -18,54 +18,62 @@
         button {
             margin: 0 auto;
         }
-
     </style>
 </head>
 <body>
 <br><br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <form class="myForm" th:action="@{/signup}" th:object="${user}" method="post">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h1 th:if="not ${edit}" style="text-align: center; color:#ffad00" >Create an account</h1><br><br>
+            <h1 th:if="${edit}" style="text-align: center; color:#ffad00" >Edit profile</h1><br><br>
+            <form class="myForm" th:action="@{/users/signup}" th:object="${user}" method="post" enctype="multipart/form-data">
+                <input type="hidden" th:field="*{id}">
                 <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="inputName">Username</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="" th:field="*{username}">
+                    <input type="text" required="required" class="form-control" id="inputName" placeholder="" th:field="*{username}">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="" th:field="*{password}">
+                    <input type="password" required="required" class="form-control" id="inputPassword" placeholder="" th:field="*{password}">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputType">User type</label>
+                    <select id="inputType" class="form-control" th:field="*{role}">
+                        <option th:value="CUSTOMER">Customer</option>
+                        <option th:value="SELLER">Seller</option>
+                    </select>
                 </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="inputFirstName">First name</label>
-                        <input type="text" class="form-control" id="inputFirstName" placeholder="" th:field="*{firstName}">
-                    </div>
-                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="inputFirstName" required="required" placeholder="" th:field="*{firstName}">
                         <label for="inputLastName">Last name</label>
-                        <input type="text" class="form-control" id="inputLastName" placeholder="" th:field="*{lastName}">
+                        <input type="text" class="form-control" id="inputLastName" required="required" placeholder="" th:field="*{lastName}">
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="aboutMe">About me</label>
+                        <textarea class="form-control" id="aboutMe" rows="4" th:field="*{aboutMe}"></textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputType">User type</label>
-                        <select id="inputType" class="form-control" th:field="*{role}">
-                            <option th:value="CUSTOMER">Customer</option>
-                            <option th:value="SELLER">Seller</option>
-                        </select>
+                    <div class="form-group col mb-3">
+                        <div class="custom-file">
+                            <p>Upload picture</p>
+                            <input type="file" accept="image/*" class="custom-file-input" name="image" id="inputGroupFile02">
+                            <label class="custom-file-label" for="inputGroupFile02" >Profile picture</label>
+                        </div>
                     </div>
                 </div>
                 <p th:text="${message}" style="color:red;"></p>
                 <div class="row">
-<!--                    <div class="col-1"></div>-->
-                    <button class="btn btn-primary col-5"  type="submit">Sign up</button>
+                    <button th:if="not ${edit}" class="btn btn-primary col-5"  type="submit">Sign up</button>
+                    <button th:if="${edit}" class="btn btn-primary col-5"  type="submit">Save changes</button>
                     <button class="btn  btn-secondary col-5" onclick="window.location.href='/login'">Back</button>
                 </div>
-
-            </form>
-
             </form>
         </div>
     </div>

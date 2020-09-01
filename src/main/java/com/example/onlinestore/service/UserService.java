@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
     }
 
     public String save(User user) {
-        if(existsByUsername(user.getUsername())) {
+        if(existsByUsername(user.getUsername()) && user.getId() != getByUsername(user.getUsername()).getId()) {
             return "Username already in use.";
         }
         if(user.getRole().equals("CUSTOMER")) {
@@ -38,6 +38,9 @@ public class UserService implements UserDetailsService {
         user.setEnabled(true);
         String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
+        if(user.getImageUrl() == null) {
+            user.setImageUrl("https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg");
+        }
         userRepository.save(user);
         return null;
     }
@@ -46,16 +49,26 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        userRepository.save(new User("michaelscott", passwordEncoder.encode("password"), true, true, true, true, UserRole.ADMIN.getGrantedAuthorities()));
         return userDao
                 .selectUserByUsername(username)
                 .orElseThrow(() ->
                 new UsernameNotFoundException("Username " + username + "not found."));
     }
 
-    public boolean existsByUsername(String username) {
+    public User getByUsername(String username) {
         return userRepository.findAll().stream()
                 .filter(user -> username.equals(user.getUsername()))
-                .findFirst().isPresent();
+                .findFirst()
+                .orElseThrow(() ->
+                                new UsernameNotFoundException("Username " + username + "not found."));
+    }
+
+    public boolean existsByUsername(String username) {
+        return userRepository.findAll().stream()
+                .anyMatch(user -> username.equals(user.getUsername()));
+    }
+
+    public void update(User user, long id) {
+        userRepository.findById(id).ifPresent(userRepository::save);
     }
 }

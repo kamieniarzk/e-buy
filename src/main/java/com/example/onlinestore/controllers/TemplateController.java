@@ -3,6 +3,7 @@ package com.example.onlinestore.controllers;
 import com.example.onlinestore.auth.User;
 import com.example.onlinestore.repository.ProductRepository;
 import com.example.onlinestore.repository.UserRepository;
+import com.example.onlinestore.service.ImageUploader;
 import com.example.onlinestore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class TemplateController {
@@ -26,22 +29,15 @@ public class TemplateController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ImageUploader imageUploader;
+
     @GetMapping("/signup")
     public String signupForm(Model model) {
         model.addAttribute("user", new User());
         return "signup";
     }
 
-    @PostMapping("/signup")
-    public String signup(@ModelAttribute("user") User user, Model model) {
-        String message = userService.save(user);
-        if(message == null) {
-            return "login";
-        } else {
-            model.addAttribute("message", message);
-            return "signup";
-        }
-    }
 
     @GetMapping("/login")
     public String login() {

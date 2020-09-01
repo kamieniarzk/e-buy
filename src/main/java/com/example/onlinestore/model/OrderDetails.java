@@ -16,9 +16,9 @@ public class OrderDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String client;
-
+    private double total;
     @CreationTimestamp
-    private Timestamp createdDate;
+    private Timestamp date;
 
     // TODO - mapping for products
 

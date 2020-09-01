@@ -13,14 +13,36 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
 @RequestMapping("/products")
+@SessionAttributes({"cart", "categories", "username", "total"})
 public class ProductController {
     private final ProductService productService;
     private final ImageUploader imageUploader;
     private final CartService cartService;
+
+    @ModelAttribute("cart")
+    public Map<Long, Product> cart() {
+        return cartService.getCart();
+    }
+
+    @ModelAttribute("username")
+    public String username() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    @ModelAttribute("categories")
+    public List<ProductCategory> categories() {
+        return ProductCategory.getCategories();
+    }
+
+    @ModelAttribute("total")
+    public Cart
+    }
 
     @Autowired
     public ProductController(ImageUploader imageUploader, CartService cartService, ProductService productService) {
@@ -32,31 +54,26 @@ public class ProductController {
     @GetMapping("/category/{category}")
     public String showCategory(@PathVariable("category") String category,  Model model) {
         model.addAttribute("products", productService.getCategory(category));
-        model.addAttribute("categories", ProductCategory.getCategories());
-        model.addAttribute("cart", cartService.getCart());
         return "home";
     }
 
     @GetMapping("/myProducts")
     public String showMyProducts(Model model) {
-        Authentication loggedUser = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("products", productService.getUserProducts(loggedUser.getName()));
-        model.addAttribute("cart", cartService.getCart());
+        String username = (String) model.getAttribute("username");
+        model.addAttribute("products", productService.getUserProducts(username));
         return "home";
     }
 
     @GetMapping("/{id}")
     public String showProduct(@PathVariable("id") long id, Model model) {
         productService.get(id).ifPresent(product -> model.addAttribute("product", product));
-        model.addAttribute("categories", ProductCategory.getCategories());
-        model.addAttribute("cart", cartService.getCart());
         return "product";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         Product product = new Product();
-        model.addAttribute("categories", ProductCategory.getCategories());
+        model.addAttribute("edit", false);
         model.addAttribute("product", product);
         return "add-form";
     }
@@ -66,42 +83,48 @@ public class ProductController {
         if(!file.isEmpty()) {
             product.setImageUrl(imageUploader.upload(file));
         }
-        Authentication loggedUser = SecurityContextHolder.getContext().getAuthentication();
-        product.setOfferedBy(loggedUser.getName());
         productService.save(product);
+        return "redirect:/products/home";
+    }
 
-        model.addAttribute("cart", cartService.getCart());
-        model.addAttribute("categories", ProductCategory.getCategories());
+    @GetMapping("/edit/{id}")
+    public String update(@PathVariable("id") long id, Model model) {
+        model.addAttribute("edit", true);
+        model.addAttribute("product", productService.get(id).get());
+        return "add-form";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable("id") long id, @ModelAttribute("product") Product product, Model model,
+                         @RequestParam("image") MultipartFile file) {
+        if(!file.isEmpty()) {
+            product.setImageUrl(imageUploader.upload(file));
+        }
+        productService.edit(product, id);
         return "redirect:/products/home";
     }
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable("id") long id, Model model) {
         productService.deleteById(id);
-        model.addAttribute("cart", cartService.getCart());
-        model.addAttribute("categories", ProductCategory.getCategories());
         return "redirect:/products/home";
     }
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable("id") long id, Model model) {
-        model.addAttribute("cart", cartService.addProduct(id));
-        model.addAttribute("categories", ProductCategory.getCategories());
+        cartService.addProduct(id);
         return "redirect:/products/home";
     }
 
     @GetMapping("/removeFromCart/{id}")
     public String removeFromCart(@PathVariable("id") long id, Model model) {
-        model.addAttribute("cart", cartService.removeProduct(id));
-        model.addAttribute("categories", ProductCategory.getCategories());
+        cartService.removeProduct(id);
         return "redirect:/products/home";
     }
 
     @GetMapping("/home")
     public String home(Model model) {
-        model.addAttribute("cart", cartService.getCart());
         model.addAttribute("products", productService.getAll());
-        model.addAttribute("categories", ProductCategory.getCategories());
         return "home";
     }
 }

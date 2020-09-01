@@ -2,9 +2,12 @@ package com.example.onlinestore.service;
 
 import com.example.onlinestore.model.Product;
 import com.example.onlinestore.repository.ProductRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,23 +18,17 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CartService cartService;
 
-
-    public Optional<Product> get(long id) {
-        if(cartService.getSessionStock().containsKey(id)) {
-            return Optional.of(cartService.getSessionStock().get(id));
-        } else {
-            return Optional.empty();
-        }
-    }
-
     public ProductService(ProductRepository productRepository, CartService cartService) {
         this.productRepository = productRepository;
         this.cartService = cartService;
     }
 
+    public Optional<Product> get(long id) {
+        return Optional.of(cartService.getSessionStock().get(id));
+    }
+
     public List<Product> getAll() {
-        return cartService.getSessionStock().values().stream()
-                .collect(Collectors.toList());
+        return new ArrayList<>(cartService.getSessionStock().values());
     }
 
     public List<Product> getCategory(String category) {
@@ -47,9 +44,20 @@ public class ProductService {
     }
 
     public void save(Product product) {
+        Authentication loggedUser = SecurityContextHolder.getContext().getAuthentication();
+        product.setOfferedBy(loggedUser.getName());
         product.setAvailable(true);
         productRepository.save(product);
         cartService.addToStock(product);
+    }
+
+    public void edit(Product product, long id) {
+        Authentication loggedUser = SecurityContextHolder.getContext().getAuthentication();
+        product.setOfferedBy(loggedUser.getName());
+        product.setId(id);
+        product.setAvailable(true);
+        productRepository.save(product);
+        cartService.editInStock(product);
     }
 
     public void deleteById(long id) {

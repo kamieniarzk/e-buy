@@ -3,6 +3,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
@@ -16,6 +19,10 @@
                 table-layout: fixed;
             }
 
+            p, h4 {
+                word-wrap:break-word;
+                word-break:break-all;
+            }
             .product {
                 color: azure;
             }
@@ -38,43 +45,54 @@
         </style>
     </head>
     <body>
-        <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-dark align-top">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">My cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Order history</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="hasAnyRole('ROLE_SELLER')">
-                        <a class="nav-link" href="/products/myProducts">My products</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a class="nav-link" href="#">Manage products</a>
-                    </li>
+    <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-dark align-top">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/products/home/}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/orders/'}">Order history</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAnyRole('ROLE_SELLER')">
+                    <a class="nav-link" href="/products/myProducts">My products</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="#">Manage products</a>
+                </li>
 
-                    <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a class="nav-link" href="#">Manage users</a>
-                    </li>
-
-                </ul>
-                <form class="form-inline align-right ml-auto mr-4" method="post" action="/logout">
-                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">logout</button>
-                </form>
-            </div>
-        </nav>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="#">Manage users</a>
+                </li>
+                <li class="nav-item ">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                th:text="${username}"></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" th:href="@{'/users/'+${username}}">My profile</a>
+                            <a class="dropdown-item" th:href="@{'/users/edit/'+${username}}">Edit account</a>
+                            <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline align-right ml-auto mr-4" method="post" action="/logout">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">logout</button>
+            </form>
+        </div>
+    </nav>
         <br><br>
         <div class="container-fluid">
             <div class="row">
-            <div class="col-2"></div>
-                <div class="col-8">
+                <div class="col-2"></div>
+                <div class="col-1"></div>
+                <div class="col-6 product">
                     <div class="row">
                         <div class="col-md-6">
-                            <img  src="http://res.cloudinary.com/ddd3ldsj2/image/upload/v1598701779/cvabevecm2bxcxxkx2bd.jpg" class="card-img-top" alt="This product has no picture">
+                            <img th:src="${product.imageUrl}" class="card-img-top" alt="This product has no picture">
                         </div>
                         <div class="product col-md-3">
 
@@ -97,6 +115,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-1"></div>
                 <div class="col-2">
                     <div class="cart">
                         <h3>Cart</h3>

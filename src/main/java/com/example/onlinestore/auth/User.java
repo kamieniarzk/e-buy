@@ -19,11 +19,14 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true)
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String role;
+    private String imageUrl;
+    private String aboutMe;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;

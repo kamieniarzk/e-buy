@@ -1,16 +1,14 @@
 package com.example.onlinestore.service;
-import com.example.onlinestore.model.OrderDetails;
 import com.example.onlinestore.model.Product;
 import com.example.onlinestore.repository.ProductRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
+
 
 @Service
 @SessionScope
@@ -19,7 +17,7 @@ public class CartService {
     private final Map<Long, Product> cart = new LinkedHashMap<>();
     private final ProductRepository productRepository;
     private final OrderDetailsService orderDetailsService;
-    private Map<Long, Product> sessionStock = new LinkedHashMap<>();
+    private final Map<Long, Product> sessionStock = new LinkedHashMap<>();
 
     public CartService(ProductRepository productRepository, OrderDetailsService orderDetailsService) {
         this.productRepository = productRepository;
@@ -66,9 +64,9 @@ public class CartService {
 
     public Map<Long, Product> getSessionStock() { return sessionStock; }
 
-    public AtomicReference<String> checkout() {
+    public long checkout() {
+        long id = -1;
         AtomicBoolean checkedOut = new AtomicBoolean(true);
-        AtomicReference<String> message = null;
         // updating stock with the database to check against cart
         Map<Long, Product> inDatabaseStock = new LinkedHashMap<>();
         productRepository.findAll()
@@ -76,7 +74,6 @@ public class CartService {
         cart.values().forEach(product -> {
             if(inDatabaseStock.get(product.getId()).getQuantity() < product.getQuantity()) {
                 checkedOut.set(false);
-                message.set("Could not checkout. " + product.getName() + " is out of stock.");
                 // remove product from cart and put back to sessionStock
                 sessionStock.get(product.getId()).setQuantity(product.getQuantity());
                 cart.remove(product.getId());
@@ -84,16 +81,18 @@ public class CartService {
         });
         if(checkedOut.get()) {
             sessionStock.values().forEach(product -> {
-                product.setArchived(true);
+                if(cart.containsKey(product.getId())) {
+                    product.setArchived(true);
+                }
                 productRepository.save(product);
             });
-            orderDetailsService.save(cart.values().stream().collect(Collectors.toList()));
+            id = orderDetailsService.save(new ArrayList<>(cart.values()));
             cart.clear();
-            return null;
-        } else {
-            return message;
         }
+        return id;
     }
+
+
 
     public void deleteFromStock(long id) {
         sessionStock.remove(id);
@@ -101,5 +100,9 @@ public class CartService {
 
     public void addToStock(Product product) {
         sessionStock.put(product.getId(), product);
+    }
+
+    public void editInStock(Product product) {
+        sessionStock.replace(product.getId(), product);
     }
 }

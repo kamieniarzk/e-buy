@@ -9,19 +9,14 @@ Stack:
 * `Maven`,
 
 ## mandatory TODOs
-* make endpoint for editing product,
-* make changes to home html,
 * plan the whole routing from scratch - now it's a mess,
-* make html and controller for orders history and single order (`OrderDetails`),
-* make the navbar usable,
-* make html and controller for editing user profile,
-* improve data validation for user sign up and product creation.
+* improve data validation for user sign up and product creation,
+* cleanup css and bootstrap includes in each html.
 
 ## possible TODOs for the future
-* make html and controller for user profile (to view other user profiles),
 * enable editing of categories for users with `ROLE_ADMIN',
 * implement pagination,
-* implement Jason Web Token for user authentication,
+
 
 ## far fetched TODOs
 * implement rating of products and users,
