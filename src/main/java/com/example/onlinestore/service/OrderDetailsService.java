@@ -53,4 +53,8 @@ public class OrderDetailsService {
         );
         return products;
     }
+
+    public Object getUserOrders(String username) {
+        return orderDetailsRepository.getUserOrders(username);
+    }
 }

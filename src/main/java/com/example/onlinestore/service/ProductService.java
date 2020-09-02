@@ -2,12 +2,13 @@ package com.example.onlinestore.service;
 
 import com.example.onlinestore.model.Product;
 import com.example.onlinestore.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,34 +25,30 @@ public class ProductService {
     }
 
     public Optional<Product> get(long id) {
-        return Optional.of(cartService.getSessionStock().get(id));
+        return productRepository.findById(id);
     }
 
     public List<Product> getAll() {
-        return new ArrayList<>(cartService.getSessionStock().values());
+        return updateAvailableForCart(productRepository.findAll());
     }
 
     public List<Product> getCategory(String category) {
-        return cartService.getSessionStock().values().stream()
-                .filter(product -> product.getCategory().equals(category.toUpperCase()))
-                .collect(Collectors.toList());
+        return updateAvailableForCart(productRepository.getCategory(category));
     }
 
     public List<Product> getUserProducts(String username) {
-        return cartService.getSessionStock().values().stream()
-                .filter(product -> product.getOfferedBy().equals(username))
-                .collect(Collectors.toList());
+        return updateAvailableForCart(productRepository.getUserProducts(username));
     }
 
     public void save(Product product) {
         Authentication loggedUser = SecurityContextHolder.getContext().getAuthentication();
         product.setOfferedBy(loggedUser.getName());
         product.setAvailable(true);
+        product.setAvailableForCart(true);
         if(product.getImageUrl() == null) {
             product.setImageUrl("https://image.shutterstock.com/image-vector/picture-vector-icon-no-image-600w-1350441335.jpg");
         }
         productRepository.save(product);
-        cartService.addToStock(product);
     }
 
     public void edit(Product product, long id) {
@@ -60,7 +57,6 @@ public class ProductService {
         product.setId(id);
         product.setAvailable(true);
         productRepository.save(product);
-        cartService.editInStock(product);
     }
 
     public void deleteById(long id) {
@@ -71,9 +67,27 @@ public class ProductService {
                     } else {
                         productRepository.deleteById(id);
                     }
-                    cartService.deleteFromStock(id);
                 }
         );
+    }
+
+    public List<Product> updateAvailableForCart(List<Product> products) {
+        return products.stream()
+                .peek(product -> {
+                    if(cartService.getCart().getProducts().containsKey(product.getId())) {
+                        if(product.getQuantity() > cartService.getCart().getProducts().get(product.getId()).getQuantity()) {
+                            product.setAvailableForCart(true);
+                        } else {
+                            product.setAvailableForCart(false);
+                        }
+                    } else if(product.getQuantity() > 0) {
+                        product.setAvailableForCart(true);
+                    }
+                }).collect(Collectors.toList());
+    }
+
+    public Page<Product> getProducts(String search, Pageable pageable) {
+        return productRepository.getProducts(search, pageable);
     }
 
 

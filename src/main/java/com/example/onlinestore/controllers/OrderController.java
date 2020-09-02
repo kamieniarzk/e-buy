@@ -4,6 +4,7 @@ import com.example.onlinestore.model.Product;
 import com.example.onlinestore.service.CartService;
 import com.example.onlinestore.service.OrderDetailsService;
 import com.example.onlinestore.utlis.ShoppingCart;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class OrderController {
 
     @GetMapping
     public String list(Model model) {
-        model.addAttribute("orders", orderDetailsService.getAll());
+        model.addAttribute("orders", orderDetailsService.getUserOrders(SecurityContextHolder.getContext().getAuthentication().getName()));
         return "order-list";
     }
 

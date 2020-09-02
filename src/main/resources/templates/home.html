@@ -9,7 +9,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
-        <link rel="stylesheet" th:href="@{/static/styles/style.css}"/>
+        <link rel="stylesheet" th:href="@{/styles/style.css}"/>
+<!--        <link rel="stylesheet" href="/styles/style.css"/>-->
     </head>
     <style>
         body {
@@ -26,6 +27,9 @@
             word-break:break-all;
         }
 
+        .center {
+            text-align: center;
+        }
 
         img {
             display: block;
@@ -40,6 +44,24 @@
             background-color: #ffad00;
             border-radius: 5px;
         }
+        .pagination {
+            display: inline-block;
+        }
+        .pagination a {
+            color: azure;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color .2s;
+        }
+        .pagination a.active {
+            background-color: #ffad00;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover:not(.active) {background-color: #747474 }
     </style>
     <body>
     <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-dark align-top">
@@ -76,6 +98,14 @@
                 </div>
                 <div class="col-1"></div>
                 <div class="col-6">
+                <form th:action="@{'/products/home/'}" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search for anything" name="search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-warning" type="submit" id="basic-addon2">Search</button>
+                        </div>
+                    </div>
+                </form>
                     <div th:if="${not (message == null)}" class="alert alert-danger" role="alert">
                         <p th:text="${message}"></p>
                     </div>
@@ -99,10 +129,10 @@
                                 <td><a th:href="@{'/products/'+${product.id}}" th:text="${product.name}"> </a></td>
                                 <td><span th:text="${'$'+product.price}"> </span></td>
                                 <td><a th:text="${product.offeredBy}" th:href="@{'/users/'+${product.offeredBy}}"> </a></td>
-                                <td th:if="${not (product.quantity == 0)}">
+                                <td th:if="${product.availableForCart}">
                                     <a th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
                                 </td>
-                                <td th:if="${product.quantity == 0}">
+                                <td th:if="${not product.availableForCart}">
                                     <span>Out of stock</span>
                                 </td>
                                 <div sec:authorize="hasRole('ROLE_ADMIN')">
@@ -125,6 +155,15 @@
                         </tr>
                         </tbody>
                     </table>
+                    <div class="center">
+                        <div class="pagination">
+                            <a href="#">&laquo;</a>
+                            <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                <a th:classappend="${(i-1) == currentPage} ? active : inactive" th:text="${i}" th:href="@{'/products/home/?page='+${i-1}}"></a>
+                            </th:block>
+                            <a href="#">&raquo;</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-2">
@@ -150,7 +189,7 @@
                         <br>
                         <div style="text-align: center; padding: 2% 0;">
                             <p style="font-weight: bold" th:if="${not cart.isEmpty()}" th:text="${'Total $'+#numbers.formatDecimal(cart.total, 0, 'COMMA', 2, 'POINT')}"></p>
-                            <button type="button" class="btn btn-dark" onclick="window.location.href='/cart/checkout'">Checkout</button>
+                            <button th:if="${not cart.isEmpty()}" type="button" class="btn btn-dark" onclick="window.location.href='/cart/checkout'">Checkout</button>
                         </div>
                         <br>
                     </div>

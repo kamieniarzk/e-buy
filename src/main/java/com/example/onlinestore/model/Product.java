@@ -27,7 +27,8 @@ public class Product {
     so that it can be seen from the orders history (only the available boolean is toggled then),
     however if it was never sold, then it can be deleted from the database
      */
-
+    @Transient
+    public boolean availableForCart;
 
     public Product(Product product) {
         this.id = product.id;
@@ -39,5 +40,20 @@ public class Product {
         this.category = product.category;
         this.imageUrl = product.imageUrl;
         this.offeredBy = product.offeredBy;
+        this.available = product.available;
+        this.archived = product.archived;
+        this.availableForCart = product.availableForCart;
+    }
+
+    public int incrementQuantity() {
+        quantity += 1;
+        return quantity;
+    }
+
+    public int decrementQuantity() {
+        if(quantity > 0 ) {
+            quantity -= 1;
+        }
+        return quantity;
     }
 }

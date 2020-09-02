@@ -7,17 +7,17 @@ import com.example.onlinestore.service.ImageUploader;
 import com.example.onlinestore.service.ProductService;
 import com.example.onlinestore.utlis.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 
 @Controller
@@ -117,14 +117,20 @@ public class ProductController {
     }
 
     @GetMapping("/removeFromCart/{id}")
-    public String removeFromCart(@PathVariable("id") long id, Model model) {
+    public String removeFromCart(@PathVariable("id") long id, Model model, @RequestHeader(value = HttpHeaders.REFERER, required = false) final String referrer) {
         cartService.removeProduct(id);
-        return "redirect:/products/home";
+        return "redirect:" + referrer;
     }
 
     @GetMapping("/home")
-    public String home(Model model) {
-        model.addAttribute("products", productService.getAll());
+    public String home(Model model, @RequestParam Optional<String> search, @RequestParam Optional<Integer> page) {
+        Page<Product> products = productService.getProducts(search.orElse("_"), PageRequest.of(page.orElse(0), 1));
+        int totalPages = products.getTotalPages();
+        model.addAttribute("currentPage", page.orElse(0));
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("products", products);
         return "home";
     }
+
+
 }

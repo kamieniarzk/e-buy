@@ -17,134 +17,104 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Transactional
 public class CartService {
     private final ShoppingCart shoppingCart;
-//    private final Map<Long, Product> cart = new LinkedHashMap<>();
     private final ProductRepository productRepository;
     private final OrderDetailsService orderDetailsService;
-    private Map<Long, Product> sessionStock = new LinkedHashMap<>();
+    private final ProductService productService;
 
-    public CartService(ProductRepository productRepository, OrderDetailsService orderDetailsService) {
+    public CartService(ProductRepository productRepository, OrderDetailsService orderDetailsService, ProductService productService) {
         this.productRepository = productRepository;
-        productRepository.findAll()
-                .forEach(product -> sessionStock.put(product.getId(), product));
         this.orderDetailsService = orderDetailsService;
+        this.productService = productService;
         shoppingCart = new ShoppingCart();
     }
 
 
-    public Map<Long, Product> addProduct(long id) {
-        if(sessionStock.containsKey(id)) {
-            int stockQuantity = sessionStock.get(id).getQuantity();
-            if(stockQuantity > 0) {
-                if(shoppingCart.getProducts().containsKey(id)) {
-                    shoppingCart.getProducts().get(id).setQuantity(shoppingCart.getProducts().get(id).getQuantity() + 1);
-                } else {
-                    Product cartProduct = new Product(sessionStock.get(id));
-                    cartProduct.setQuantity(1);
-                    shoppingCart.getProducts().put(id, cartProduct);
-                }
-                sessionStock.get(id).setQuantity(stockQuantity - 1);
-                shoppingCart.setTotal(shoppingCart.getTotal() + shoppingCart.getProducts().get(id).getPrice());
-            }
+    public void addProduct(long id) {
+        if(productService.get(id).isPresent()) {
+            Product stockProduct = productService.get(id).get();
+            shoppingCart.addProduct(stockProduct);
         }
-        return shoppingCart.getProducts();
     }
 
-    public Map<Long, Product> removeProduct(long id) {
-        if(sessionStock.containsKey(id)) {
-            int stockQuantity = sessionStock.get(id).getQuantity();
-            if(shoppingCart.getProducts().containsKey(id) && shoppingCart.getProducts().get(id).getQuantity() > 0) {
-                shoppingCart.getProducts().get(id).setQuantity(shoppingCart.getProducts().get(id).getQuantity() - 1);
-                shoppingCart.setTotal(shoppingCart.getTotal() - shoppingCart.getProducts().get(id).getPrice());
-                if(shoppingCart.getProducts().get(id).getQuantity() == 0) {
-                    shoppingCart.getProducts().remove(id);
-                    shoppingCart.setTotal(0.0);
-                }
-            }
-            sessionStock.get(id).setQuantity(stockQuantity + 1);
+    public boolean removeProduct(long id) {
+        if(productService.get(id).isPresent()) {
+            Product stockProduct = productService.get(id).get();
+            shoppingCart.removeProduct(stockProduct);
+            return true;
         }
-        return shoppingCart.getProducts();
+        return false;
     }
 
     public ShoppingCart getCart() {
         return shoppingCart;
     }
 
-    public Map<Long, Product> getSessionStock() { return sessionStock; }
 
     public long checkout() {
         long id = -1;
         List<Long> toRemove = new ArrayList<>();
         AtomicBoolean checkedOut = new AtomicBoolean(true);
         // updating stock with the database to check against cart
-        Map<Long, Product> inDatabaseStock = new LinkedHashMap<>();
         if(shoppingCart.isEmpty()) {
             return id;
         }
-        productRepository.findAll()
-                .forEach(product -> inDatabaseStock.put(product.getId(), product));
+
         shoppingCart.getProducts().values().forEach(product -> {
-            if(inDatabaseStock.get(product.getId()).getQuantity() < product.getQuantity()) {
+            if(productService.get(product.getId()).isPresent()) {
+                if(productService.get(product.getId()).get().getQuantity() < product.getQuantity()) {
+                    checkedOut.set(false);
+                    // remove product from cart and put back to sessionStock
+                    toRemove.add(product.getId());
+                    // update session stock
+                }
+            } else {
                 checkedOut.set(false);
-                // remove product from cart and put back to sessionStock
                 toRemove.add(product.getId());
-                // update session stock
-                productRepository.findAll()
-                        .forEach(pr -> sessionStock.put(pr.getId(), pr));
             }
         });
         // to avoid ConcurrentModificationException,
         // remove the products from shopping cart after iterating over it
         toRemove.forEach(productId -> shoppingCart.getProducts().remove(productId));
         if(checkedOut.get()) {
-            sessionStock.values().forEach(product -> {
-                if(shoppingCart.getProducts().containsKey(product.getId())) {
-                    product.setArchived(true);
-                }
-                productRepository.save(product);
-            });
+            shoppingCart.getProducts().values()
+                    .forEach(product -> {
+                        Product toSave = new Product(productService.get(product.getId()).get());
+                        toSave.setQuantity(toSave.getQuantity() - product.getQuantity());
+                        productRepository.save(toSave);
+                    });
             id = orderDetailsService.save(new ArrayList<>(shoppingCart.getProducts().values()));
             shoppingCart.getProducts().clear();
             shoppingCart.setTotal(0.0);
         }
         return id;
     }
+//
+//    public String updateSessionStock() {
+//        String returnMessage = null;
+//        Map<Long, Product> inDatabaseStock = new LinkedHashMap<>();
+//        if(shoppingCart.isEmpty()) {
+//            productRepository.findAll()
+//                    .forEach(product -> sessionStock.put(product.getId(), product));
+//        } else {
+//            List<Long> toRemove = new ArrayList<>();
+//            List<String> outOfStockItems = new ArrayList<>();
+//            productRepository.findAll()
+//                    .forEach(product -> inDatabaseStock.put(product.getId(), product));
+//            shoppingCart.getProducts().values().forEach(product -> {
+//                if(inDatabaseStock.get(product.getId()).getQuantity() < product.getQuantity()) {
+//                    // remove product from cart and put back to sessionStock
+//                    outOfStockItems.add(product.getName());
+//                    toRemove.add(product.getId());
+//                }
+//            });
+//            toRemove.forEach(productId -> shoppingCart.getProducts().remove(productId));
+//            if(!outOfStockItems.isEmpty()) {
+//                returnMessage = "Sorry! Items " + outOfStockItems.toString() + " are out of stock. Cart updated.";
+//            }
+//        }
+//        return returnMessage;
+//
+//    }
 
-    public String updateSessionStock() {
-        String returnMessage = null;
-        Map<Long, Product> inDatabaseStock = new LinkedHashMap<>();
-        if(shoppingCart.isEmpty()) {
-            productRepository.findAll()
-                    .forEach(product -> sessionStock.put(product.getId(), product));
-        } else {
-            List<Long> toRemove = new ArrayList<>();
-            List<String> outOfStockItems = new ArrayList<>();
-            productRepository.findAll()
-                    .forEach(product -> inDatabaseStock.put(product.getId(), product));
-            shoppingCart.getProducts().values().forEach(product -> {
-                if(inDatabaseStock.get(product.getId()).getQuantity() < product.getQuantity()) {
-                    // remove product from cart and put back to sessionStock
-                    outOfStockItems.add(product.getName());
-                    toRemove.add(product.getId());
-                }
-            });
-            toRemove.forEach(productId -> shoppingCart.getProducts().remove(productId));
-            if(!outOfStockItems.isEmpty()) {
-                returnMessage = "Sorry! Items " + outOfStockItems.toString() + " are out of stock. Cart updated.";
-            }
-        }
-        return returnMessage;
 
-    }
-
-    public void deleteFromStock(long id) {
-        sessionStock.remove(id);
-    }
-
-    public void addToStock(Product product) {
-        sessionStock.put(product.getId(), product);
-    }
-
-    public void editInStock(Product product) {
-        sessionStock.replace(product.getId(), product);
-    }
 }
