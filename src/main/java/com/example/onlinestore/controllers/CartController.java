@@ -7,10 +7,12 @@ import com.example.onlinestore.service.ImageUploader;
 import com.example.onlinestore.service.OrderDetailsService;
 import com.example.onlinestore.service.ProductService;
 
+import com.example.onlinestore.utlis.ShoppingCart;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public class CartController {
     private final OrderDetailsService orderDetailsService;
 
     @ModelAttribute("cart")
-    public Map<Long, Product> cart() {
+    public ShoppingCart cart() {
         return cartService.getCart();
     }
     public CartController(ProductService productService, CartService cartService, OrderDetailsService orderDetailsService) {
@@ -33,10 +35,10 @@ public class CartController {
     }
 
     @GetMapping("/checkout")
-    public String checkout(Model model) {
+    public String checkout(Model model, RedirectAttributes redirectAttributes) {
         long id = cartService.checkout();
         if(id == -1) {
-            model.addAttribute("message", "could not checkout");
+            redirectAttributes.addFlashAttribute("message", "Something went wrong with checkout. Please try again.");
             return "redirect:/products/home";
         } else {
             OrderDetails orderDetails = orderDetailsService.get(id);

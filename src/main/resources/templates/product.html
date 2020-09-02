@@ -15,7 +15,8 @@
                 font-family: 'Kanit', sans-serif;
             }
             table {
-                width: 100%;
+                width: 90%;
+                margin: 0 auto;
                 table-layout: fixed;
             }
 
@@ -52,36 +53,21 @@
                     <a class="nav-link" th:href="@{/products/home/}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My cart</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" th:href="@{'/orders/'}">Order history</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ROLE_SELLER')">
                     <a class="nav-link" href="/products/myProducts">My products</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="nav-link" href="#">Manage products</a>
-                </li>
-
-                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="nav-link" href="#">Manage users</a>
-                </li>
-                <li class="nav-item ">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                th:text="${username}"></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" th:href="@{'/users/'+${username}}">My profile</a>
-                            <a class="dropdown-item" th:href="@{'/users/edit/'+${username}}">Edit account</a>
-                            <a class="dropdown-item" th:href="@{/logout}">Logout</a>
-                        </div>
-                    </div>
-                </li>
             </ul>
-            <form class="form-inline align-right ml-auto mr-4" method="post" action="/logout">
-                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">logout</button>
-            </form>
+            <div class="dropdown" style="margin-left: auto; margin-right: 10px;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        th:text="${username}"></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" th:href="@{'/users/'+${username}}">My profile</a>
+                    <a class="dropdown-item" th:href="@{'/users/edit/'+${username}}">Edit account</a>
+                    <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                </div>
+            </div>
         </div>
     </nav>
         <br><br>
@@ -118,26 +104,29 @@
                 <div class="col-1"></div>
                 <div class="col-2">
                     <div class="cart">
-                        <h3>Cart</h3>
+                        <br><h3>Cart</h3><br>
                         <div style="text-align:center;" th:if="${cart.isEmpty()}">
                             Your cart is empty
                             <p>Time to start shopping!</p>
                         </div>
                         <table>
-                            <tr th:each="prod : ${cart}">
-                                <td th:text="${prod.value.name}">keyvalue</td>
-                                <td style="text-align: right;">
+                            <tr th:each="prod : ${cart.products}">
+                                <td style="width:50%;"><a th:href="@{'/products/'+${prod.value.id}}" th:text="${prod.value.name}">keyvalue</a></td>
+                                <td style="width:25%;" th:text="${'$'+prod.value.price}">price</td>
+                                <td style="text-align: right; width:5%;">
                                     <a th:href="@{'/products/removeFromCart/'+${prod.key}}">-</a>
                                 </td>
-                                <td style="text-align: center;" th:text="${prod.value.quantity}">num</td>
-                                <td style="text-align: left;">
+                                <td style="text-align: center; width:15%;" th:text="${prod.value.quantity}">num</td>
+                                <td style="text-align: left; width:5%;">
                                     <a th:href="@{'/products/addToCart/'+${prod.key}}">+</a>
                                 </td>
                             </tr>
                         </table>
                         <div style="text-align: center; padding: 2% 0;">
+                            <p style="font-weight: bold" th:if="${not cart.isEmpty()}" th:text="${'Total $'+#numbers.formatDecimal(cart.total, 0, 'COMMA', 2, 'POINT')}"></p>
                             <button type="button" class="btn btn-dark" onclick="window.location.href='/cart/checkout'">Checkout</button>
                         </div>
+                        <br>
                     </div>
                 </div>
             </div>

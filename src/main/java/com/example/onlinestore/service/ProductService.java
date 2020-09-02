@@ -47,6 +47,9 @@ public class ProductService {
         Authentication loggedUser = SecurityContextHolder.getContext().getAuthentication();
         product.setOfferedBy(loggedUser.getName());
         product.setAvailable(true);
+        if(product.getImageUrl() == null) {
+            product.setImageUrl("https://image.shutterstock.com/image-vector/picture-vector-icon-no-image-600w-1350441335.jpg");
+        }
         productRepository.save(product);
         cartService.addToStock(product);
     }

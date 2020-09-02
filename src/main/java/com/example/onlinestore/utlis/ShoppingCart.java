@@ -10,10 +10,14 @@ import java.util.Map;
 @Getter
 @Setter
 public class ShoppingCart {
-    private final Map<Long, Product> cart = new LinkedHashMap<>();
+    private final Map<Long, Product> products = new LinkedHashMap<>();
     private Double total;
 
     public ShoppingCart() {
         total = 0.0;
+    }
+
+    public boolean isEmpty() {
+        return products.isEmpty();
     }
 }

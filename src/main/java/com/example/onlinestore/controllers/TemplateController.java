@@ -35,9 +35,9 @@ public class TemplateController {
     @GetMapping("/signup")
     public String signupForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("edit", false);
         return "signup";
     }
-
 
     @GetMapping("/login")
     public String login() {

@@ -5,13 +5,16 @@ import com.example.onlinestore.model.ProductCategory;
 import com.example.onlinestore.service.CartService;
 import com.example.onlinestore.service.ImageUploader;
 import com.example.onlinestore.service.ProductService;
+import com.example.onlinestore.utlis.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Map;
@@ -19,14 +22,14 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/products")
-@SessionAttributes({"cart", "categories", "username", "total"})
+@SessionAttributes({"cart", "categories", "username"})
 public class ProductController {
     private final ProductService productService;
     private final ImageUploader imageUploader;
     private final CartService cartService;
 
     @ModelAttribute("cart")
-    public Map<Long, Product> cart() {
+    public ShoppingCart get() {
         return cartService.getCart();
     }
 
@@ -40,9 +43,6 @@ public class ProductController {
         return ProductCategory.getCategories();
     }
 
-    @ModelAttribute("total")
-    public Cart
-    }
 
     @Autowired
     public ProductController(ImageUploader imageUploader, CartService cartService, ProductService productService) {
@@ -111,9 +111,9 @@ public class ProductController {
     }
 
     @GetMapping("/addToCart/{id}")
-    public String addToCart(@PathVariable("id") long id, Model model) {
+    public String addToCart(@PathVariable("id") long id, Model model, @RequestHeader(value = HttpHeaders.REFERER, required = false) final String referrer) {
         cartService.addProduct(id);
-        return "redirect:/products/home";
+        return "redirect:" + referrer;
     }
 
     @GetMapping("/removeFromCart/{id}")

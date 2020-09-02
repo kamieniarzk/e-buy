@@ -21,6 +21,30 @@
     </style>
 </head>
 <body>
+<nav th:if=${edit}" class="navbar navbar-dark navbar-expand-lg navbar-light bg-dark align-top">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/products/home/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/orders/'}">Order history</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyRole('ROLE_SELLER')">
+                <a class="nav-link" href="/products/myProducts">My products</a>
+            </li>
+        </ul>
+        <div class="dropdown" style="margin-left: auto; margin-right: 10px;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    th:text="${username}"></button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" th:href="@{'/users/'+${username}}">My profile</a>
+                <a class="dropdown-item" th:href="@{'/users/edit/'+${username}}">Edit account</a>
+                <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
 <br><br>
 <div class="container-fluid">
     <div class="row">
@@ -70,8 +94,8 @@
                 </div>
                 <p th:text="${message}" style="color:red;"></p>
                 <div class="row">
-                    <button th:if="not ${edit}" class="btn btn-primary col-5"  type="submit">Sign up</button>
-                    <button th:if="${edit}" class="btn btn-primary col-5"  type="submit">Save changes</button>
+                    <button th:if="not ${edit}" class="btn btn-primary col-5" type="submit">Sign up</button>
+                    <button th:if="${edit}" class="btn btn-primary col-5" type="submit">Save changes</button>
                     <button class="btn  btn-secondary col-5" onclick="window.location.href='/login'">Back</button>
                 </div>
             </form>

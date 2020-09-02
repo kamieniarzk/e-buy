@@ -3,6 +3,7 @@ package com.example.onlinestore.controllers;
 import com.example.onlinestore.model.Product;
 import com.example.onlinestore.service.CartService;
 import com.example.onlinestore.service.OrderDetailsService;
+import com.example.onlinestore.utlis.ShoppingCart;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class OrderController {
     }
 
     @ModelAttribute("cart")
-    public Map<Long, Product> cart() {
+    public ShoppingCart cart() {
         return cartService.getCart();
     }
 
