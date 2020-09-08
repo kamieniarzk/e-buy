@@ -10,13 +10,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @Query(value = "SELECT * FROM product WHERE category=:category", nativeQuery = true)
-    List<Product> getCategory(@Param("category") String category);
+    @Query(value = "SELECT p FROM Product p WHERE lower(p.category)=lower(:category) AND p.available=true")
+    Page<Product> getCategory(@Param("category") String category, Pageable pageable);
 
-    @Query(value = "SELECT * FROM product WHERE offered_by=:username", nativeQuery = true)
-    List<Product> getUserProducts(@Param("username") String username);
+    @Query(value = "SELECT p FROM Product p WHERE p.offeredBy=:username AND p.available=true")
+    Page<Product> getUserProducts(@Param("username") String username, Pageable pageable);
 
-    @Query(value = "SELECT * FROM product WHERE name like %:search%", nativeQuery = true)
+    @Query(value = "SELECT p FROM Product p WHERE lower(p.name) like lower(concat('%', :search,'%')) AND p.available=true")
     Page<Product> getProducts(@Param("search") String search, Pageable pageable);
 
 }

@@ -1,12 +1,14 @@
 package com.example.onlinestore.security;
 
-import com.example.onlinestore.service.UserService;
+import com.example.onlinestore.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,12 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
     @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, UserService userService) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, UserServiceImpl userServiceImpl) {
         this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
+        this.userServiceImpl = userServiceImpl;
     }
 
 
@@ -30,29 +32,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/signup").permitAll()
-                    .antMatchers("/users/signup").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/users/signup").permitAll()
+                .antMatchers("/products/**").permitAll()
+                .antMatchers("/").permitAll()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .failureUrl("/login-error")
-                    .permitAll()
-                    .defaultSuccessUrl("/products/home", true)
-                    .passwordParameter("password")
-                    .usernameParameter("username")
+                .loginPage("/users/login")
+                .failureUrl("/users/login-error")
+                .permitAll()
+                .defaultSuccessUrl("/products/home", true)
+                .passwordParameter("password")
+                .usernameParameter("username")
                 .and()
                 .rememberMe()
                 .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .clearAuthentication(true)
-                    .invalidateHttpSession(true)
-                    .deleteCookies("JSESSIONID", "remember-me")
-                    .logoutSuccessUrl("/login")
+                .logoutUrl("/logout")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID", "remember-me")
+                .logoutSuccessUrl("/products/home")
                 .and()
                 .headers().frameOptions().disable();
 
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring().antMatchers("/css/**", "/image/**");
     }
 
     @Override
@@ -64,7 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(userService);
+        provider.setUserDetailsService(userServiceImpl);
         return provider;
-  }
+    }
+
 }

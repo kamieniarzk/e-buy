@@ -1,7 +1,8 @@
-package com.example.onlinestore.service;
+package com.example.onlinestore.service.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.example.onlinestore.service.ImageUploadService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,10 +10,10 @@ import java.io.IOException;
 import java.util.Map;
 
 @Service
-public class ImageUploader {
+public class ImageUploadServiceImpl implements ImageUploadService {
     private final Cloudinary cloudinary;
 
-    public ImageUploader() {
+    public ImageUploadServiceImpl() {
         cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "ddd3ldsj2",
                 "api_key", "944312699884881",
@@ -20,10 +21,10 @@ public class ImageUploader {
         ));
     }
 
-    public String upload(MultipartFile file) {
+    public String upload(MultipartFile image) {
         Map uploadResult = null;
         try {
-            uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+            uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
             return uploadResult.get("url").toString();
         } catch (IOException e) {
             e.printStackTrace();

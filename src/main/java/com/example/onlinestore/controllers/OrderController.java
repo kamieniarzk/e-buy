@@ -1,42 +1,46 @@
 package com.example.onlinestore.controllers;
 
-import com.example.onlinestore.model.Product;
-import com.example.onlinestore.service.CartService;
-import com.example.onlinestore.service.OrderDetailsService;
+import com.example.onlinestore.model.OrderDetails;
+import com.example.onlinestore.service.impl.CartServiceImpl;
+import com.example.onlinestore.service.impl.OrderDetailsServiceImpl;
 import com.example.onlinestore.utlis.ShoppingCart;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes({"cart"})
 public class OrderController {
-    private final OrderDetailsService orderDetailsService;
-    private final CartService cartService;
+    private final OrderDetailsServiceImpl orderDetailsServiceImpl;
+    private final CartServiceImpl cartServiceImpl;
 
-    public OrderController(OrderDetailsService orderDetailsService, CartService cartService) {
-        this.orderDetailsService = orderDetailsService;
-        this.cartService = cartService;
+    public OrderController(OrderDetailsServiceImpl orderDetailsServiceImpl, CartServiceImpl cartServiceImpl) {
+        this.orderDetailsServiceImpl = orderDetailsServiceImpl;
+        this.cartServiceImpl = cartServiceImpl;
     }
 
     @ModelAttribute("cart")
     public ShoppingCart cart() {
-        return cartService.getCart();
+        return cartServiceImpl.getCart();
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping
     public String list(Model model) {
-        model.addAttribute("orders", orderDetailsService.getUserOrders(SecurityContextHolder.getContext().getAuthentication().getName()));
+        model.addAttribute("orders", orderDetailsServiceImpl.getUserOrders(SecurityContextHolder.getContext().getAuthentication().getName()));
+        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
         return "order-list";
     }
 
+    @PreAuthorize("hasAuthority('transaction:read')")
     @GetMapping("/{id}")
     public String get(@PathVariable("id") long id, Model model) {
-        model.addAttribute("order", orderDetailsService.get(id));
+        OrderDetails orderDetails = orderDetailsServiceImpl.get(id);
+        model.addAttribute("products", orderDetailsServiceImpl.populateProducts(orderDetails.getProducts()));
+        model.addAttribute("order", orderDetails);
         return "order";
     }
 }
