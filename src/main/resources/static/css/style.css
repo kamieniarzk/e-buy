@@ -93,6 +93,10 @@ body {
     color: azure;
     font-weight: normal;
 }
+.tableHeading:hover {
+    color: gray;
+}
+
 .buttonLine {
     margin: 0 auto;
 }
@@ -104,8 +108,19 @@ body {
 .productName {
     color: azure;
 }
+
+.productName:hover {
+    color: gray;
+    text-decoration: none;
+}
+
 .userName {
     color: #7100ff;
+}
+
+.userName:hover {
+    color: #4e00b7;
+    text-decoration: none;
 }
 
 .delete {
@@ -113,10 +128,16 @@ body {
 }
 .delete:hover {
     color: darkred;
+    text-decoration: none;
 }
 
 .addToCartText {
     color: #ffad00;
+}
+
+.addToCartText:hover {
+    color: #bc8000;
+    text-decoration: none;
 }
 
 .outOfStock {
