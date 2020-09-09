@@ -100,3 +100,30 @@ body {
 .activeCategory {
     background-color: #bc8000;
 }
+
+.productName {
+    color: azure;
+}
+.userName {
+    color: #7100ff;
+}
+
+.delete {
+    color: red;
+}
+.delete:hover {
+    color: darkred;
+}
+
+.addToCartText {
+    color: #ffad00;
+}
+
+.outOfStock {
+    color: gray;
+}
+
+.btn-outline-light:hover,
+.btn-outline-light:active {
+    color: #181818;
+}

@@ -59,7 +59,7 @@
             </ul>
             <div style="margin-left: auto;">
                 <a class="btn btn-outline-warning product" type="button" th:href="@{'/users/login'}">Sign in</a>
-                <a class="btn btn-outline-primary product" type="button" th:href="@{'/users/signup'}">Sign up</a>
+                <a class="btn btn-outline-light product" type="button" th:href="@{'/users/signup'}">Sign up</a>
             </div>
         </div>
     </nav>
@@ -110,13 +110,13 @@
                                 <img class="myImg" th:if="${not #strings.isEmpty(product.imageUrl)}" th:src="${product.imageUrl}" />
                                 <img class="myImg" th:if="${#strings.isEmpty(product.imageUrl)}" th:src="@{/image/no_image.png}" />
                             </td>
-                            <td><a th:href="@{'/products/'+${product.id}}" th:text="${product.name}"> </a></td>
+                            <td><a class="productName" th:href="@{'/products/'+${product.id}}" th:text="${product.name}"> </a></td>
                             <td><span th:text="${'$'+product.price}"> </span></td>
-                            <td><a th:text="${product.offeredBy}" th:href="@{'/users/'+${product.offeredBy}}"> </a></td>
+                            <td><a class="userName" th:text="${product.offeredBy}" th:href="@{'/users/'+${product.offeredBy}}"> </a></td>
                             <td th:if="${product.availableForCart}">
-                                <a th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
+                                <a class="addToCartText" th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
                             </td>
-                            <td th:if="${not product.availableForCart}">
+                            <td class="outOfStock" th:if="${not product.availableForCart}">
                                 <span>Out of stock</span>
                             </td>
                             <div th:if="${#strings.equals(product.offeredBy, username)}" sec:authorize="hasRole('ROLE_SELLER')">
@@ -126,7 +126,7 @@
                             </div>
                             <div th:if="${#strings.equals(product.offeredBy, username)}" sec:authorize="hasRole('ROLE_SELLER')">
                                 <td>
-                                    <a th:href="@{'/products/delete/'+${product.id}}">Delete</a>
+                                    <a class="delete" th:href="@{'/products/delete/'+${product.id}}">Delete</a>
                                 </td>
                             </div>
                             <div sec:authorize="hasRole('ROLE_ADMIN')">
@@ -136,7 +136,7 @@
                             </div>
                             <div sec:authorize="hasRole('ROLE_ADMIN')">
                                 <td>
-                                    <a th:href="@{'/products/delete/'+${product.id}}">Delete</a>
+                                    <a class="delete" th:href="@{'/products/delete/'+${product.id}}">Delete</a>
                                 </td>
                             </div>
                         </div>
