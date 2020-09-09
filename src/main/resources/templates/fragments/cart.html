@@ -1,0 +1,28 @@
+<div th:fragment="cart">
+    <div class="cart">
+        <br><h3 class="center">Cart</h3><br>
+        <div style="text-align:center;" th:if="${cart.isEmpty()}">
+            Your cart is empty
+            <p>Time to start shopping!</p>
+        </div>
+        <table>
+            <tr th:each="prod : ${cart.products}">
+                <td style="width:50%;"><a th:href="@{'/products/'+${prod.value.id}}" th:text="${prod.value.name}">keyvalue</a></td>
+                <td style="width:25%;" th:text="${'$'+prod.value.price}">price</td>
+                <td style="text-align: right; width:5%;">
+                    <a th:href="@{'/products/removeFromCart/'+${prod.key}}">-</a>
+                </td>
+                <td style="text-align: center; width:15%;" th:text="${prod.value.quantity}">num</td>
+                <td style="text-align: left; width:5%;">
+                    <a th:href="@{'/products/addToCart/'+${prod.key}}">+</a>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div style="text-align: center; padding: 2% 0;">
+            <p style="font-weight: bold" th:if="${not cart.isEmpty()}" th:text="${'Total $'+#numbers.formatDecimal(cart.total, 0, 'COMMA', 2, 'POINT')}"></p>
+            <button th:if="${not cart.isEmpty()}" type="button" class="btn btn-dark" onclick="window.location.href='/cart/checkout'">Checkout</button>
+        </div>
+        <br>
+    </div>
+</div>

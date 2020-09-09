@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.math.BigDecimal;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -12,10 +15,14 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
+    @Size(min = 2, max = 20)
     private String name;
     private String description;
-    private double mass;
-    private double price;
+    private @DecimalMin("0") @DecimalMax("1000.0") BigDecimal mass;
+    @NotNull
+    private @DecimalMin("0.01") BigDecimal price;
+    @Min(1)
     private int quantity;
     private String category;
     private String imageUrl;
@@ -30,8 +37,10 @@ public class Product {
     @Transient
     public boolean availableForCart;
 
-    public Product(Product product) {
-        this.id = product.id;
+    public Product(Product product, boolean edit) {
+        if(!edit) {
+            this.id = product.id;
+        }
         this.name = product.name;
         this.description = product.description;
         this.mass = product.mass;
@@ -56,4 +65,5 @@ public class Product {
         }
         return quantity;
     }
+
 }

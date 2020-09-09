@@ -11,11 +11,11 @@ Stack:
 ## mandatory TODOs
 * plan the whole routing from scratch - now it's a mess,
 * improve data validation for user sign up and product creation,
-* cleanup css and bootstrap includes in each html.
+* cleanup css and bootstrap includes in each html,
+* add user field in single product view
 
 ## possible TODOs for the future
 * enable editing of categories for users with `ROLE_ADMIN',
-* implement pagination,
 
 
 ## far fetched TODOs
