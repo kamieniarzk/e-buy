@@ -1,6 +1,6 @@
 package com.example.onlinestore.service;
 
-import com.example.onlinestore.auth.User;
+import com.example.onlinestore.model.User;
 
 public interface UserService {
     String save(User user);

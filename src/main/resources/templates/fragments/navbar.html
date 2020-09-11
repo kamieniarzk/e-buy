@@ -1,7 +1,7 @@
 <div th:fragment="authenticated">
     <nav sec:authorize="isAuthenticated()" class="navbar navbar-dark navbar-expand-lg navbar-light bg-dark align-top">
         <div class="collapse navbar-collapse" >
-            <ul class="navbar-nav">
+            <ul class="nav navbar-nav navbar-left">
                 <li class="nav-item" th:classappend="${#strings.contains(#httpServletRequest.requestURI, 'products/home')
                     or #strings.contains(#httpServletRequest.requestURI, 'products/category')} ? active : inactive">
                     <a class="nav-link" th:href="@{/products/home/}">Home </a>
@@ -22,6 +22,9 @@
                         <a class="nav-link" th:href="@{'/users/'+${username}}">My profile</a>
                     </li>
                 </div>
+            </ul>
+            <ul class="nav navbar-nav navbar-center align-center pageTitle">
+                <h3 style="text-align: center;">e-buy</h3>
             </ul>
             <div class="dropdown" style="margin-left: auto;">
                 <button class="btn btn-outline-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -44,6 +47,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{/products/home/}">Home <span class="sr-only">(current)</span></a>
                 </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-center align-center pageTitle" th:if="${not #strings.contains(#httpServletRequest.requestURI, 'users/login')}">
+                <h3 style="text-align: center;">e-buy</h3>
             </ul>
             <div style="margin-left: auto;">
                 <a class="btn btn-outline-warning product" type="button" th:href="@{'/users/login'}">Sign in</a>

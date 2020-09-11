@@ -1,4 +1,4 @@
-package com.example.onlinestore.auth;
+package com.example.onlinestore.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

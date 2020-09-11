@@ -1,9 +1,8 @@
 package com.example.onlinestore.service.impl;
 
-import com.example.onlinestore.auth.User;
+import com.example.onlinestore.model.User;
 import com.example.onlinestore.service.UserDaoService;
 import com.example.onlinestore.repository.UserRepository;
-import com.example.onlinestore.security.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -20,9 +19,6 @@ public class UserDaoServiceServiceImpl implements UserDaoService {
     public UserDaoServiceServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
-//        userRepository.save(new User("michaelscott", passwordEncoder.encode("password"), "Michael", "Scott", true, true, true, true, UserRole.ADMIN.getGrantedAuthorities()));
-//        userRepository.save(new User("user", passwordEncoder.encode("password"), "User", "Lastname", true, true, true, true, UserRole.CUSTOMER.getGrantedAuthorities()));
-
     }
 
     @Override

@@ -1,5 +1,5 @@
 package com.example.onlinestore.controllers;
-import com.example.onlinestore.auth.User;
+import com.example.onlinestore.model.User;
 import com.example.onlinestore.model.Product;
 import com.example.onlinestore.service.impl.CartServiceImpl;
 import com.example.onlinestore.service.impl.ImageUploadServiceImpl;

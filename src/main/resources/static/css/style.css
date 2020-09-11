@@ -8,7 +8,7 @@ body {
     margin-bottom: 100px;
     clear: both;
     background-color: #232323;
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 .pagination {
     display: inline-block;
@@ -102,9 +102,14 @@ body {
 }
 
 .activeCategory {
-    background-color: #bc8000;
+    background-color: #ffad00;
+    color: white;
 }
 
+.activeCategory:hover {
+    background-color: #bc8000;
+    color: white;
+}
 .productName {
     color: azure;
 }
@@ -147,4 +152,17 @@ body {
 .btn-outline-light:hover,
 .btn-outline-light:active {
     color: #181818;
+}
+
+.pageTitle {
+    color: #ffad00;
+    text-align: center;
+    font-family: 'Gochi Hand', cursive;
+}
+
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
 }

@@ -1,6 +1,6 @@
 package com.example.onlinestore.service.impl;
 
-import com.example.onlinestore.auth.User;
+import com.example.onlinestore.model.User;
 import com.example.onlinestore.service.UserDaoService;
 import com.example.onlinestore.repository.UserRepository;
 import com.example.onlinestore.security.UserRole;
@@ -21,6 +21,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         this.userDaoService = userDaoService;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        if(!existsByUsername("michaelscott")) {
+            userRepository.save(new User("michaelscott", passwordEncoder.encode("Shimanokatana1"), "Michael", "Scott", true, true, true, true, UserRole.ADMIN.getGrantedAuthorities()));
+        }
     }
 
     public String save(User user) {
