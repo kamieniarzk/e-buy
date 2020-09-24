@@ -38,4 +38,29 @@ OrderDetails is an entity class for storing the information about each order tha
 A user can access their previous orders by visiting `Orders history`.
 
 ## Security
-User authentication is implemented using a login form. User's credentials are stored in the database and passwords are encrypted using BCrypt algorihtm. There are 3 user roles: `ADMIN`, `SELLER` and `CUSTOMER` and 4 user permissions: `PRODUCT_READ`, `PRODUCT_WRITE`, `TRANSACTION_READ`, `TRANSACTION_WRITE`. `ADMIN` has all permissions.
+User authentication is implemented using a login form. User's credentials are stored in the database and passwords are encrypted using BCrypt algorihtm. There are 3 user roles: `ADMIN`, `SELLER` and `CUSTOMER` and 4 user permissions: `PRODUCT_READ`, `PRODUCT_WRITE`, `TRANSACTION_READ`, `TRANSACTION_WRITE`. Endpoints are secured using `@PreAuthorize` annotation.
+
+## User interface
+### Main page
+The main page displays a list of products, by default from all the categories. The user can either select from the categories on the left or try the search bar above the list. There are also sorting options to be chosen - by name, price or the user who offers the product. Product queries have pagination implemented - each query shows up to 5 products per page. On the right hand side of the page there is a shopping cart widget which displays current state of user's products added to the cart.<br>
+![](https://res.cloudinary.com/ddd3ldsj2/image/upload/v1600980647/Screenshot_2_ymtrag.jpg)<br>
+### Product page
+The product page simply presents the details of a product.<br>
+![](https://res.cloudinary.com/ddd3ldsj2/image/upload/v1600981168/Screenshot_3_cvjofx.jpg)<br>
+### User page
+User page presents user details along with list of products offered by them.<br>
+![](https://res.cloudinary.com/ddd3ldsj2/image/upload/v1600983227/Screenshot_5_jvwdrj.jpg)<br>
+### Order page
+Order page presents the list of products from the order with date and order total.<br>
+![](https://res.cloudinary.com/ddd3ldsj2/image/upload/v1600983303/Screenshot_6_uqdos7.jpg)<br>
+### Orders list
+Orders list page presents a list of user's past orders.<br>
+![](https://res.cloudinary.com/ddd3ldsj2/image/upload/v1600983424/Screenshot_7_f4pndh.jpg)
+### User form
+User form is used for either new user sign up or editing existing user's profile.<br>
+![](https://res.cloudinary.com/ddd3ldsj2/image/upload/v1600983555/Screenshot_8_xauwk1.jpg)<br>
+### Product form
+Product form is used for either adding a new product or editing an existing one.<br>
+![](https://res.cloudinary.com/ddd3ldsj2/image/upload/v1600983631/Screenshot_9_je1hrf.jpg)<br>
+
+
