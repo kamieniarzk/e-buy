@@ -21,8 +21,6 @@ public class OrderDetails {
     @CreationTimestamp
     private Timestamp date;
 
-    // TODO - mapping for products
-
     @ElementCollection(fetch = FetchType.LAZY)
     private Map<Long, Integer> products = new LinkedHashMap<>();
 

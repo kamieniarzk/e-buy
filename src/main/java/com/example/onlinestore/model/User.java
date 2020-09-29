@@ -35,6 +35,7 @@ public class User implements UserDetails {
     private String lastName;
     private String role;
     private String imageUrl;
+    @Column(columnDefinition = "LONGTEXT")
     private String aboutMe;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;

@@ -13,7 +13,6 @@
         }
         p, h4 {
             word-wrap:break-word;
-            word-break:break-all;
         }
     </style>
 </head>
@@ -59,7 +58,6 @@
                             <th scope="col">Sort by</th>
                             <th scope="col"><a th:href="@{'/users/' + ${user.username} + '?sortBy=name'}">Name</a></th>
                             <th scope="col"><a th:href="@{'/users/' + ${user.username} + '?sortBy=price'}">Price</a></th>
-                            <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
