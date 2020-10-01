@@ -1,5 +1,5 @@
 # e-buy
-[e-buy](http://ebuy.eu-central-1.elasticbeanstalk.com/) <----------  
+[e-buy](https://ebuy-app.herokuapp.com/) <----------  
 A Spring Boot application, imitating basic functionality of consumer-to-consumer and business-to-consumer sales service.
 Stack: 
 * `Spring Boot`,
