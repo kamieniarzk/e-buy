@@ -9,14 +9,17 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>security-practice</artifactId>
+    <artifactId>e-buy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>security-practice</name>
+    <name>e-buy</name>
     <description>Demo project for Spring Boot</description>
+
 
     <properties>
         <java.version>11</java.version>
+        <spring.profiles.active>postgres</spring.profiles.active>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -27,7 +30,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.16</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -104,9 +111,13 @@
         </dependency>
     </dependencies>
 
-
-
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -114,5 +125,17 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>build</id>
+            <properties>
+                <activatedProperties>build</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
 </project>

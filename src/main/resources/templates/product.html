@@ -14,7 +14,6 @@
 
             p, h4 {
                 word-wrap:break-word;
-                word-break:break-all;
             }
         </style>
     </head>
@@ -40,8 +39,6 @@
                             <p class="productTitle">Category:  <a class="productName" th:href="@{'/products/category/'+${product.category}}" th:text="${product.category}">Category</a></p>
                             <p th:if="${product.mass != null}" class="productTitle" th:text="${'Mass: ' + product.mass + 'oz'}"></p>
                             <p class="productTitle">Offered by:  <a th:href="@{'/users/'+${product.offeredBy}}" class="userName" th:text="${product.offeredBy}">User</a></p>
-                            <p th:if="${not #strings.isEmpty(product.description)}" class="productTitle">Description</p>
-                            <p class="card-text" th:text="${product.description}"></p>
                         </div>
                         <div class="product col-md-3">
                             <div class="card w-85" style="text-align: center;">
@@ -51,6 +48,13 @@
                                     <a th:if="${product.availableForCart}" style="font-size: small;" th:href="@{'/products/addToCart/'+${product.id}}" th:text="${'Add to cart'}" class="btn btn-warning addToCartButton"></a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-7">
+                            <p th:if="${not #strings.isEmpty(product.description)}" class="productTitle">Description</p>
+                            <p class="card-text" th:text="${product.description}"></p>
                         </div>
                     </div>
                 </div>

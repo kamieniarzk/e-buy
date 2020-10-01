@@ -13,7 +13,6 @@
         }
         p, h4 {
             word-wrap:break-word;
-            word-break:break-all;
         }
     </style>
 </head>
@@ -60,20 +59,19 @@
                             <th scope="col"><a th:href="@{'/users/' + ${user.username} + '?sortBy=name'}">Name</a></th>
                             <th scope="col"><a th:href="@{'/users/' + ${user.username} + '?sortBy=price'}">Price</a></th>
                             <th scope="col"></th>
-                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="product : ${products}">
                             <div th:if="${product.available}">
                                 <td><img class="myImg" th:src="${product.imageUrl}" alt="No image"></img></td>
-                                <td><a th:href="@{'/products/'+${product.id}}" th:text="${product.name}"> </a></td>
+                                <td><a class="productName" th:href="@{'/products/'+${product.id}}" th:text="${product.name}"> </a></td>
                                 <td><span th:text="${'$'+product.price}"> </span></td>
                                 <td th:if="${not (product.quantity == 0)}">
-                                    <a th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
+                                    <a class="addToCartText" th:href="@{'~/products/addToCart/'+${product.id}}">Add to cart</a>
                                 </td>
                                 <td th:if="${product.quantity == 0}">
-                                    <span>Out of stock</span>
+                                    <span class="outOfStock">Out of stock</span>
                                 </td>
 
                             </div>
