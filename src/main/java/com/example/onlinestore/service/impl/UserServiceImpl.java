@@ -21,9 +21,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         this.userDaoService = userDaoService;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        if(!existsByUsername("michaelscott")) {
-            userRepository.save(new User("michaelscott", passwordEncoder.encode("Shimanokatana1"), "Michael", "Scott", true, true, true, true, UserRole.ADMIN.getGrantedAuthorities()));
-        }
     }
 
     public String save(User user) {

@@ -18,7 +18,7 @@ public class Product {
     @NotNull
     @Size(min = 2, max = 20)
     private String name;
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
     private @DecimalMin("0") @DecimalMax("1000.0") BigDecimal mass;
     @NotNull

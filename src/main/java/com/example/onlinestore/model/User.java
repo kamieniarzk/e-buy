@@ -17,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "user_profile")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +36,7 @@ public class User implements UserDetails {
     private String lastName;
     private String role;
     private String imageUrl;
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     private String aboutMe;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
