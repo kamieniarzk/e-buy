@@ -1,8 +1,8 @@
-2020-08-23 12:17:15 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 12:17:15 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO PRODUCT (CATEGORY,DESCRIPTION,MASS,NAME,PRICE,QUANTITY) VALUE[*](""MEAT"",""chicken tenders"",122.4,""chicken breast"",12.99,10)"; oczekiwano "DIRECT, SORTED, DEFAULT, VALUES, SET, (, WITH, SELECT, TABLE, VALUES"
 Syntax error in SQL statement "INSERT INTO PRODUCT (CATEGORY,DESCRIPTION,MASS,NAME,PRICE,QUANTITY) VALUE[*](""MEAT"",""chicken tenders"",122.4,""chicken breast"",12.99,10)"; expected "DIRECT, SORTED, DEFAULT, VALUES, SET, (, WITH, SELECT, TABLE, VALUES"; SQL statement:
 INSERT INTO product (category,description,mass,name,price,quantity) value("MEAT","chicken tenders",122.4,"chicken breast",12.99,10) [42001-200]
-2020-08-23 12:18:51 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 12:18:51 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "MEAT" nie istnieje
 Column "MEAT" not found; SQL statement:
 INSERT INTO product (category,description,mass,name,price,quantity) values ("MEAT","chicken tenders",122.4,"chicken breast",12.99,10) [42122-200]
@@ -100,7 +100,7 @@ INSERT INTO product (category,description,mass,name,price,quantity) values ("MEA
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 12:19:15 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 12:19:15 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "chicken tenders" nie istnieje
 Column "chicken tenders" not found; SQL statement:
 INSERT INTO product (category,description,mass,name,price,quantity) values (1,"chicken tenders",122.4,"chicken breast",12.99,10) [42122-200]
@@ -198,7 +198,7 @@ INSERT INTO product (category,description,mass,name,price,quantity) values (1,"c
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 12:24:26 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 12:24:26 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "chicken tenders" nie istnieje
 Column "chicken tenders" not found; SQL statement:
 INSERT INTO product (category,description,mass,name,price,quantity) values (1,"chicken tenders",122.4,"chicken breast",12.99,10) [42122-200]
@@ -296,7 +296,7 @@ INSERT INTO product (category,description,mass,name,price,quantity) values (1,"c
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 12:25:48 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 12:25:48 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "chicken tenders" nie istnieje
 Column "chicken tenders" not found; SQL statement:
 INSERT INTO product (category,description,mass,name,price,quantity) VALUES (1,"chicken tenders",122.4,"chicken breast",12.99,10) [42122-200]
@@ -394,7 +394,7 @@ INSERT INTO product (category,description,mass,name,price,quantity) VALUES (1,"c
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 12:26:47 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 12:26:47 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "chicken breast" nie istnieje
 Column "chicken breast" not found; SQL statement:
 INSERT INTO product (category,description,mass,name,price,quantity) VALUES (1,'chicken tenders',122.4,"chicken breast",12.99,10) [42122-200]
@@ -492,7 +492,7 @@ INSERT INTO product (category,description,mass,name,price,quantity) VALUES (1,'c
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:19:23 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:19:23 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "MEAT" nie istnieje
 Column "MEAT" not found; SQL statement:
 insert into product (category, description, mass, name ,price, quantity) values ("MEAT", "chicken tenders", 120.9,"chicken",9.99,10) [42122-200]
@@ -590,7 +590,7 @@ insert into product (category, description, mass, name ,price, quantity) values 
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:21:49 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:21:49 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO PRODUCT (CATEGORY, DESCRIPTION, MASS, NAME ,PRICE, QUANTITY) VALUES ('SEAFOOD', 'prawn', 120.9,'jumbo shrimp',9.99,10)
 INSERT[*] INTO PRODUCT (CATEGORY, DESCRIPTION, MASS, NAME ,PRICE, QUANTITY) VALUES ('DAIRY', 'whole milk', 120.9,'milk',9.99,10)
 INSERT INTO PRODUCT (CATEGORY, DESCRIPTION, MASS, NAME ,PRICE, QUANTITY) VALUES ('SNACK', 'beef jerky', 120.9,'beef jerky',9.99,10)
@@ -603,7 +603,7 @@ insert into product (category, description, mass, name ,price, quantity) values 
 insert into product (category, description, mass, name ,price, quantity) values ('DAIRY', 'whole milk', 120.9,'milk',9.99,10)
 insert into product (category, description, mass, name ,price, quantity) values ('SNACK', 'beef jerky', 120.9,'beef jerky',9.99,10)
 insert into product (category, description, mass, name ,price, quantity) values ('BEVERAGES', 'Budweiser', 120.9,'beer',9.99,10) [42000-200]
-2020-08-23 18:57:10 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:57:10 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "SEAFOOD" nie istnieje
 Column "SEAFOOD" not found; SQL statement:
 SELECT * FROM product WHERE CATEGORY=SEAFOOD [42122-200]
@@ -702,7 +702,7 @@ SELECT * FROM product WHERE CATEGORY=SEAFOOD [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:57:16 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:57:16 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "SEAFOOD" nie istnieje
 Column "SEAFOOD" not found; SQL statement:
 SELECT * FROM product WHERE CATEGORY=`SEAFOOD` [42122-200]
@@ -801,7 +801,7 @@ SELECT * FROM product WHERE CATEGORY=`SEAFOOD` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:57:28 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:57:28 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "SEAFOOD" nie istnieje
 Column "SEAFOOD" not found; SQL statement:
 SELECT * FROM product WHERE CATEGORY=`seafood` [42122-200]
@@ -900,7 +900,7 @@ SELECT * FROM product WHERE CATEGORY=`seafood` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:57:29 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:57:29 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "SEAFOOD" nie istnieje
 Column "SEAFOOD" not found; SQL statement:
 SELECT * FROM product WHERE CATEGORY=`seafood` [42122-200]
@@ -999,7 +999,7 @@ SELECT * FROM product WHERE CATEGORY=`seafood` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:57:29 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:57:29 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "SEAFOOD" nie istnieje
 Column "SEAFOOD" not found; SQL statement:
 SELECT * FROM product WHERE CATEGORY=`seafood` [42122-200]
@@ -1098,7 +1098,7 @@ SELECT * FROM product WHERE CATEGORY=`seafood` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:58:08 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:58:08 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "SEAFOOD" nie istnieje
 Column "SEAFOOD" not found; SQL statement:
 SELECT * FROM product WHERE category=`seafood` [42122-200]
@@ -1197,7 +1197,7 @@ SELECT * FROM product WHERE category=`seafood` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:58:26 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:58:26 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "MEAT" nie istnieje
 Column "MEAT" not found; SQL statement:
 SELECT * FROM product WHERE category=`meat` [42122-200]
@@ -1296,7 +1296,7 @@ SELECT * FROM product WHERE category=`meat` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:58:49 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:58:49 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "MEAT" nie istnieje
 Column "MEAT" not found; SQL statement:
 SELECT * FROM product WHERE category=`meat` [42122-200]
@@ -1395,7 +1395,7 @@ SELECT * FROM product WHERE category=`meat` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:59:14 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:59:14 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "MEAT" nie istnieje
 Column "MEAT" not found; SQL statement:
 SELECT * FROM product WHERE category=`meat` [42122-200]
@@ -1494,7 +1494,7 @@ SELECT * FROM product WHERE category=`meat` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:59:19 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:59:19 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "MEAT" nie istnieje
 Column "MEAT" not found; SQL statement:
 SELECT * FROM product WHERE category=`MEAT` [42122-200]
@@ -1593,7 +1593,7 @@ SELECT * FROM product WHERE category=`MEAT` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 18:59:23 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 18:59:23 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "MEAT" nie istnieje
 Column "MEAT" not found; SQL statement:
 SELECT * FROM product WHERE category= `MEAT` [42122-200]
@@ -1692,7 +1692,7 @@ SELECT * FROM product WHERE category= `MEAT` [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-23 19:01:17 jdbc[13]: com.example.onlinestore.exception
+2020-08-23 19:01:17 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "MEAT" nie istnieje
 Column "MEAT" not found; SQL statement:
 SELECT * FROM product WHERE category= "MEAT" [42122-200]
@@ -1961,7 +1961,7 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Kac
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 46 more
-2020-08-27 20:20:32 jdbc[3]: com.example.onlinestore.exception
+2020-08-27 20:20:32 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "PRODUCT0_.ARCHIVED" nie istnieje
 Column "PRODUCT0_.ARCHIVED" not found; SQL statement:
 select product0_.id as id1_3_, product0_.archived as archived2_3_, product0_.available_for_sale as availabl3_3_, product0_.category as category4_3_, product0_.description as descript5_3_, product0_.image_url as image_ur6_3_, product0_.mass as mass7_3_, product0_.name as name8_3_, product0_.offered_by as offered_9_3_, product0_.price as price10_3_, product0_.quantity as quantit11_3_ from product product0_ [42122-200]
@@ -2034,7 +2034,7 @@ select product0_.id as id1_3_, product0_.archived as archived2_3_, product0_.ava
 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:205)
 	at com.sun.proxy.$Proxy87.findAll(Unknown Source)
-	at com.example.onlinestore.service.impl.CartService.<init>(CartService.java:25)
+	at com.example.ebuy.service.impl.CartService.<init>(CartService.java:25)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -2055,8 +2055,8 @@ select product0_.id as id1_3_, product0_.archived as archived2_3_, product0_.ava
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
 	at org.springframework.aop.target.SimpleBeanTargetSource.getTarget(SimpleBeanTargetSource.java:35)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:675)
-	at com.example.onlinestore.service.impl.CartService$$EnhancerBySpringCGLIB$$63378521.getCart(<generated>)
-	at com.example.onlinestore.controllers.ProductController.home(ProductController.java:102)
+	at com.example.ebuy.service.impl.CartService$$EnhancerBySpringCGLIB$$63378521.getCart(<generated>)
+	at com.example.ebuy.controllers.ProductController.home(ProductController.java:102)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2138,23 +2138,23 @@ select product0_.id as id1_3_, product0_.archived as archived2_3_, product0_.ava
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-27 20:29:42 jdbc[13]: com.example.onlinestore.exception
+2020-08-27 20:29:42 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "USER[*]"; oczekiwano "UPDATE, USE"
 Syntax error in SQL statement "USER[*]"; expected "UPDATE, USE"; SQL statement:
 USER [42001-200]
-2020-08-27 20:29:43 jdbc[13]: com.example.onlinestore.exception
+2020-08-27 20:29:43 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "USER[*]"; oczekiwano "UPDATE, USE"
 Syntax error in SQL statement "USER[*]"; expected "UPDATE, USE"; SQL statement:
 USER [42001-200]
-2020-08-30 19:01:09 jdbc[13]: com.example.onlinestore.exception
+2020-08-30 19:01:09 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "DELETE *[*] FROM USER"; oczekiwano "identifier"
 Syntax error in SQL statement "DELETE *[*] FROM USER"; expected "identifier"; SQL statement:
 DELETE * FROM USER [42001-200]
-2020-08-31 14:37:05 jdbc[13]: com.example.onlinestore.exception
+2020-08-31 14:37:05 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "ORDER_DETAILS_PRODUCT" nie istnieje
 Table "ORDER_DETAILS_PRODUCT" not found; SQL statement:
 DELETE FROM ORDER_DETAILS_PRODUCT [42102-200]
-2020-08-31 14:37:21 jdbc[3]: com.example.onlinestore.exception
+2020-08-31 14:37:21 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "TOTAL" nie istnieje
 Column "TOTAL" not found; SQL statement:
 insert into order_details (id, client, date, total) values (null, ?, ?, ?) [42122-200]
@@ -2245,8 +2245,8 @@ insert into order_details (id, client, date, total) values (null, ?, ?, ?) [4212
 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:205)
 	at com.sun.proxy.$Proxy87.save(Unknown Source)
-	at com.example.onlinestore.service.impl.OrderDetailsService.save(OrderDetailsService.java:34)
-	at com.example.onlinestore.service.impl.OrderDetailsService$$FastClassBySpringCGLIB$$4576f1b7.invoke(<generated>)
+	at com.example.ebuy.service.impl.OrderDetailsService.save(OrderDetailsService.java:34)
+	at com.example.ebuy.service.impl.OrderDetailsService$$FastClassBySpringCGLIB$$4576f1b7.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -2256,9 +2256,9 @@ insert into order_details (id, client, date, total) values (null, ?, ?, ?) [4212
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
-	at com.example.onlinestore.service.impl.OrderDetailsService$$EnhancerBySpringCGLIB$$a479cf2e.save(<generated>)
-	at com.example.onlinestore.service.impl.CartService.checkout(CartService.java:92)
-	at com.example.onlinestore.service.impl.CartService$$FastClassBySpringCGLIB$$4f71f62b.invoke(<generated>)
+	at com.example.ebuy.service.impl.OrderDetailsService$$EnhancerBySpringCGLIB$$a479cf2e.save(<generated>)
+	at com.example.ebuy.service.impl.CartService.checkout(CartService.java:92)
+	at com.example.ebuy.service.impl.CartService$$FastClassBySpringCGLIB$$4f71f62b.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -2268,8 +2268,8 @@ insert into order_details (id, client, date, total) values (null, ?, ?, ?) [4212
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
-	at com.example.onlinestore.service.impl.CartService$$EnhancerBySpringCGLIB$$a7e7450a.checkout(<generated>)
-	at com.example.onlinestore.service.impl.CartService$$FastClassBySpringCGLIB$$4f71f62b.invoke(<generated>)
+	at com.example.ebuy.service.impl.CartService$$EnhancerBySpringCGLIB$$a7e7450a.checkout(<generated>)
+	at com.example.ebuy.service.impl.CartService$$FastClassBySpringCGLIB$$4f71f62b.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -2279,8 +2279,8 @@ insert into order_details (id, client, date, total) values (null, ?, ?, ?) [4212
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
-	at com.example.onlinestore.service.impl.CartService$$EnhancerBySpringCGLIB$$9390df0d.checkout(<generated>)
-	at com.example.onlinestore.controllers.CartController.checkout(CartController.java:27)
+	at com.example.ebuy.service.impl.CartService$$EnhancerBySpringCGLIB$$9390df0d.checkout(<generated>)
+	at com.example.ebuy.controllers.CartController.checkout(CartController.java:27)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2370,7 +2370,7 @@ insert into order_details (id, client, date, total) values (null, ?, ?, ?) [4212
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-08-31 15:24:08 jdbc[3]: com.example.onlinestore.exception
+2020-08-31 15:24:08 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -2405,7 +2405,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:170)
 	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:949)
-2020-08-31 15:24:08 jdbc[3]: com.example.onlinestore.exception
+2020-08-31 15:24:08 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -2496,7 +2496,7 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1178)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 29 more
-2020-09-01 15:00:04 jdbc[3]: com.example.onlinestore.exception
+2020-09-01 15:00:04 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -2535,8 +2535,8 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:205)
 	at com.sun.proxy.$Proxy91.save(Unknown Source)
-	at com.example.onlinestore.service.impl.UserService.save(UserService.java:44)
-	at com.example.onlinestore.controllers.UserController.signup(UserController.java:52)
+	at com.example.ebuy.service.impl.UserService.save(UserService.java:44)
+	at com.example.ebuy.controllers.UserController.signup(UserController.java:52)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2626,7 +2626,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-01 15:00:04 jdbc[3]: com.example.onlinestore.exception
+2020-09-01 15:00:04 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -2666,8 +2666,8 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:205)
 	at com.sun.proxy.$Proxy91.save(Unknown Source)
-	at com.example.onlinestore.service.impl.UserService.save(UserService.java:44)
-	at com.example.onlinestore.controllers.UserController.signup(UserController.java:52)
+	at com.example.ebuy.service.impl.UserService.save(UserService.java:44)
+	at com.example.ebuy.controllers.UserController.signup(UserController.java:52)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2757,7 +2757,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-01 15:00:04 jdbc[3]: com.example.onlinestore.exception
+2020-09-01 15:00:04 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -2866,7 +2866,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-01 15:00:04 jdbc[3]: com.example.onlinestore.exception
+2020-09-01 15:00:04 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -2975,7 +2975,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-01 15:00:04 jdbc[3]: com.example.onlinestore.exception
+2020-09-01 15:00:04 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -3084,7 +3084,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-02 14:35:22 jdbc[3]: com.example.onlinestore.exception
+2020-09-02 14:35:22 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -3194,7 +3194,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-02 14:35:22 jdbc[3]: com.example.onlinestore.exception
+2020-09-02 14:35:22 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -3304,7 +3304,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-02 14:35:22 jdbc[3]: com.example.onlinestore.exception
+2020-09-02 14:35:22 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -3414,7 +3414,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-02 19:47:41 jdbc[13]: com.example.onlinestore.exception
+2020-09-02 19:47:41 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "_" nie istnieje
 Column "_" not found; SQL statement:
 SELECT * FROM product WHERE name like _ [42122-200]
@@ -3513,11 +3513,11 @@ SELECT * FROM product WHERE name like _ [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-02 19:47:45 jdbc[13]: com.example.onlinestore.exception
+2020-09-02 19:47:45 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "SELECT * FROM PRODUCT WHERE NAME LIKE[*]"
 Syntax error in SQL statement "SELECT * FROM PRODUCT WHERE NAME LIKE[*]"; SQL statement:
 SELECT * FROM product WHERE name like [42000-200]
-2020-09-02 19:47:50 jdbc[13]: com.example.onlinestore.exception
+2020-09-02 19:47:50 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "_" nie istnieje
 Column "_" not found; SQL statement:
 SELECT * FROM product WHERE name like "_" [42122-200]
@@ -3616,11 +3616,11 @@ SELECT * FROM product WHERE name like "_" [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-2020-09-02 19:48:28 jdbc[13]: com.example.onlinestore.exception
+2020-09-02 19:48:28 jdbc[13]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "SELECT * FROM PRODUCT WHERE NAME LIKE %[*]''%"
 Syntax error in SQL statement "SELECT * FROM PRODUCT WHERE NAME LIKE %[*]''%"; SQL statement:
 SELECT * FROM product WHERE name like %''% [42000-200]
-2020-09-03 10:13:18 jdbc[3]: com.example.onlinestore.exception
+2020-09-03 10:13:18 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "SELECT * FROM PRODUCT WHERE NAME LIKE ? COLLATE[*] NOCASE AND AVAILABLE=TRUE LIMIT ?"
 Syntax error in SQL statement "SELECT * FROM PRODUCT WHERE NAME LIKE ? COLLATE[*] NOCASE AND AVAILABLE=TRUE LIMIT ?"; SQL statement:
 SELECT * FROM product WHERE name like ? COLLATE NOCASE AND available=true limit ? [42000-200]
@@ -3954,7 +3954,7 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1178)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 29 more
-2020-09-07 17:25:08 jdbc[3]: com.example.onlinestore.exception
+2020-09-07 17:25:08 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -3989,7 +3989,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:170)
 	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:949)
-2020-09-07 17:25:08 jdbc[3]: com.example.onlinestore.exception
+2020-09-07 17:25:08 jdbc[3]: com.example.ebuy.exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Baza danych jest już zamknięta (aby zablokować samoczynne zamykanie podczas zamknięcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
@@ -4109,7 +4109,7 @@ Wrong user name or password [28000-200]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
-	at com.example.onlinestore.EbuyApp.main(EbuyApp.java:10)
+	at com.example.ebuy.EbuyApp.main(EbuyApp.java:10)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nieprawidłowy użytkownik/hasło
 Wrong user name or password [28000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
@@ -4249,7 +4249,7 @@ Wrong user name or password [28000-200]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
-	at com.example.onlinestore.EbuyApp.main(EbuyApp.java:10)
+	at com.example.ebuy.EbuyApp.main(EbuyApp.java:10)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nieprawidłowy użytkownik/hasło
 Wrong user name or password [28000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
@@ -4389,7 +4389,7 @@ Wrong user name or password [28000-200]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
-	at com.example.onlinestore.EbuyApp.main(EbuyApp.java:10)
+	at com.example.ebuy.EbuyApp.main(EbuyApp.java:10)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nieprawidłowy użytkownik/hasło
 Wrong user name or password [28000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
@@ -4529,7 +4529,7 @@ Wrong user name or password [28000-200]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
-	at com.example.onlinestore.EbuyApp.main(EbuyApp.java:10)
+	at com.example.ebuy.EbuyApp.main(EbuyApp.java:10)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nieprawidłowy użytkownik/hasło
 Wrong user name or password [28000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
@@ -4673,7 +4673,7 @@ Wrong user name or password [28000-200]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
-	at com.example.onlinestore.EbuyApp.main(EbuyApp.java:10)
+	at com.example.ebuy.EbuyApp.main(EbuyApp.java:10)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nieprawidłowy użytkownik/hasło
 Wrong user name or password [28000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
