@@ -1,5 +1,5 @@
+[e-buy](https://ebuy-app.herokuapp.com/) <----------  *Please be aware, the page may load for up to 15 seconds, because I'm running it on a free dyno hours on heroku. (if there's no web traffic in 30 minutes, the app shutsdown and it only boots up when a new request comes).*<br><br>
 # e-buy
-[e-buy](https://ebuy-app.herokuapp.com/) <----------  
 A Spring Boot application, imitating basic functionality of consumer-to-consumer and business-to-consumer sales service.
 Stack: 
 * `Spring Boot`,
